@@ -1,0 +1,3408 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Michael Pusch">
+  <meta name="GENERATOR"
+ content="Mozilla/4.7 [en] (WinNT; U) [Netscape]">
+  <title>Manual for Analysis Program ana</title>
+  <style type="text/css">
+<!--
+.style1 {
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;
+}
+.style2 {font-family: Arial, Helvetica, sans-serif}
+.style4 {
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;
+font-size: 36px;
+}
+.style6 {font-size: 18px}
+.style8 {font-family: Arial, Helvetica, sans-serif; font-style: italic; }
+-->
+  </style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"
+ class="style2" alink="#ff0000" link="#0000ee" vlink="#551a8b">
+<center>
+<h2><a name="Title"></a>User Manual for</h2>
+</center>
+<center>
+<h1>Ana</h1>
+</center>
+<center>
+<h3>Michael Pusch, Istituto di Biofisica, Genova,&nbsp;<a name="email"></a>email:
+<a href="mailto:pusch@icb.ge.cnr.it">pusch@ge.ibf.cnr.it</a>&nbsp;<br>
+Last change: 23.08.2007</h3>
+</center>
+<a name="Index"></a>
+<br>
+Index
+<br>
+<a href="#Introduction">1. Introduction</a>
+<br>
+<a href="#Installation">1.1. Installation</a>
+<p><a href="#Subwindows">2. Subwindows</a>
+<br>
+<a href="#Tree">2.1. Tree window</a>
+<br>
+<a href="#Traces">2.2. Traces window</a>
+<br>
+<a href="#Filter">2.2.1. Filtering traces</a>
+<br>
+<a href="#Results">2.3. Results window</a>
+</p>
+<p><a href="#RelevantSegment">3. The relevant segment</a>
+</p>
+<p><a href="#Cursors">4. Cursors in the "trace" window</a>
+</p>
+<p><a href="#Shortcuts">5. Short-cut keys</a>
+</p>
+<p><a href="#ScalingDisplay">6. Scaling the display of the traces</a>
+</p>
+<p><a href="#ParameterSettings">7. Parameter settings</a>
+</p>
+<p><a href="#EditingParameters">7.1. Editing parameters</a>
+<br>
+<a href="#LoadingParameters">7.2. Loading/Saving</a>
+<br>
+<a href="#ContextSensitiveParameters">7.3. Context sensitive parameters</a>
+<br>
+<a href="#UndoParameters">7.4. Undoing a parameter settings change</a>
+</p>
+<p><a href="#EditingCommands">8. Editing comands - The internal buffer</a>
+<br>
+<a href="#UndoingOperation">8.1. Undoing an erroneous operation :
+Exchange</a>
+<br>
+<a href="#Copying">8.2. Copying/pasting/cutting/deleting/merging traces
+and series</a>
+<br>
+<a href="#PermanentFilter">8.3. Permanent filtering</a>
+<br>
+<a href="#Undersample">8.4. Undersampling</a>
+<br>
+<a href="#Average">8.5. Calculating the average</a>
+<br>
+<a href="#ExtractRecords">8.6. Copying selected records</a>
+<br>
+<a href="#Concat">8.7. Concatenate entries</a>
+<br>
+<a href="#DeleteStretch">8.8. Deleting a stretch</a>
+<br>
+<a href="#ExtractStretch">8.9. Extracting a stretch</a>
+<br>
+<a href="#Overlayenvelope">8.10. Overlay envelope</a>
+<br>
+<a href="#SwapDataFit">8.11. Swapping data and fit</a>
+<br>
+<a href="#ReverseTime">8.12. Reverse time</a>
+<br>
+<a href="#PasteAsFit">8.13. Paste as fit</a>
+</p>
+<p><a href="#TraceFitting">9. Trace fitting</a>
+<br>
+<a href="#ExponentialFit">9.1. Exponential fits</a>
+<br>
+<a href="#SimpleExponentialFit">9.1.1. Simple exponential fit</a>
+<br>
+<a href="#CommonExponentialFit">9.1.2. Fit several traces
+simultaneously
+with the same time-constants for all</a>
+<br>
+<a href="#OtherExponentials">9.1.3. Other exponentials</a>
+<br>
+<a href="#Envelope">9.1.4. Envelope</a>
+<br>
+<a href="#Polynomial">9.2. Polynomial</a>
+<br>
+<a href="#UserDefined">9.3. User defined</a>
+</p>
+<p><a href="#SeriesFit">10. Series Fit</a>
+<br>
+<a href="#Boltzmann">10.1. Boltzmann</a>
+<br>
+<a href="#PolynomialSeriesFit">10.2. Polynomial</a>
+<br>
+<a href="#UserDefinedSeriesFit">10.3. User defined function</a>
+</p>
+<p><a href="#LeakCapac50Hz">11. Leak, capacity, and line frequency
+(50/60
+Hz) subtraction</a>
+<br>
+<a href="#BaselineSubtraction">11.1. Baseline subtraction</a>
+<br>
+<a href="#LeakSubtraction">11.2. Leak subtraction</a>
+<br>
+<a href="#SubtractScaledSeries">11.2.1. subtract a scaled series</a>
+<br>
+<a href="#SubtractUsingBaseline">11.2.2. Subtract using a baseline
+segment where channels are supposed to be closed</a>
+<br>
+<a href="#Capacity%20correction">11.3. Capacity correction</a>
+<br>
+<a href="#50HzSubtraction">11.4. line frequency (50/60 Hz) subtraction</a>
+<br>
+<a href="#Automatic50Hz">11.4.1 Automatic line frequency (50/60 Hz)
+subtraction</a>
+<br>
+<a href="#Manual50Hz">11.4.2 Manual line frequency (50/60 Hz)
+subtraction</a>
+</p>
+<p><a href="#ScalingTraces">12. Scaling traces</a>
+<br>
+<a href="#ScalingFactorAndConstant">12.1 Scaling by a factor and add
+a constant</a>
+<br>
+<a href="#ScalingTails">12.2 Scaling traces of a series to have a
+common
+value in a certain segment</a>
+</p>
+<p><a href="#NoiseAnalysis">13. Noise analysis</a>
+<br>
+<a href="#NoiseSelection">13.1. Selection of records and cursor settings</a>
+<br>
+<a href="#VarMeanFit">13.2. Variance-mean analysis</a>
+</p>
+<p><a href="#SingleChannelAnalysis">14. Single channel analysis</a>
+<br>
+<a href="#AmplitudeHistogram">14.1. Amplitude Histogram and Gaussian
+Fit</a>
+<br>
+<a href="#Idealization">14.2. Idealization</a>
+<br>
+<a href="#ManualEditing">14.3. Manual editing of the idealized record</a>
+<br>
+<a href="#DwellTimes">14.4. Dwell time analysis</a><br>
+<a href="#BinomialPeakAnalysis">14.5. Binomial Peak analysis</a><br>
+</p>
+<p><a href="#SpectralAnalysis">15. Spectral analysis</a>
+</p>
+<p><a href="#Exporting">16. Exporting data</a>
+<br>
+<a href="#ExportRawData">16.1. Export raw data</a>
+<br>
+<a href="#ExportAnalysis">16.2. Export analysis results (mean, tau,
+peak, etc)</a>
+<br>
+<a href="#ExportNoise">16.3. Export noise analysis</a>
+<br>
+<a href="#ExportSpectrum">16.4. Export spectrum</a>
+<br>
+<a href="#ExportAmplitudeHistogram">16.5. Export amplitude histogram</a>
+<br>
+<a href="#ExportDwellTimeHistogram">16.5. Export dwell time histogram</a>
+</p>
+<p><a href="#Misc">17. Misc.</a>
+<br>
+<a href="#EditStimwave">17.1. Changing the pulse protocol ("Stimwave")</a>
+</p>
+<p><a href="#Appendix">18. Appendix</a>
+<br>
+<a href="#SupportedFiles">18.1. Supported data file types</a>
+<br>
+<a href="#SavedFile">18.2. The internal data-format of ana: what is
+saved on a file?</a>
+<br>
+<a href="#Syntax">18.3. Syntactic rules for the user-defined function</a>
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><a name="Introduction"></a></p>
+<h3>1. Introduction</h3>
+This manual is contained in only one html-file to allow the use of the
+<tt>Find</tt>
+feature of your browser in the whole manual and to facilitate its
+printing.
+<p><font size="+1">Ana</font> is a program for the analysis of
+electrophysiological
+data. The emphasis is on pulsed data, in particular of
+voltage-dependent
+currents. But also continuous data can be analyzed. In particular <a
+ href="#SingleChannelAnalysis">single-channel
+analysis </a>is possible.
+<br>
+<font size="+1">Ana</font> can read various <a href="#SupportedFiles">file-formats
+</a>.
+<br>
+Data can be
+<a href="#EditingCommands">edited </a>extensively (i.e.
+traces or parts of traces can be deleted, copied, pasted, ...).
+<br>
+The main purpose is
+<a href="#TraceFitting">fitting of traces</a>,
+<a href="#SeriesFit">extracting
+of IV&acute;s</a> (and other things like that),
+<a href="#LeakCapac50Hz">leak
+subtraction </a>,
+<a href="#ScalingTraces">scaling</a>,
+<a href="#NoiseAnalysis">(non-stationary)
+noise analysis</a>,
+<a href="#SingleChannelAnalysis">single-channel analysis</a>,
+and
+<a href="#SpectralAnalysis">spectral analysis</a>.
+<br>
+<font size="+1">Ana</font> is not able to save data in any of the
+formats
+used by the standard acquisition programs but ONLY in its <a
+ href="#SavedFile">own
+format!</a> In this format, however, it is possible to store a lot of
+data
+analysis.
+</p>
+<p>The program is for free but no responsibility whatsoever is assumed
+by the author. For the latest version, comments and suggestions
+contact:
+</p>
+<p>Michael Pusch, Istituto di Biofisica, Genova, email: <a
+ href="mailto:pusch@ge.ibf.cnr.it">pusch@ge.ibf.cnr.it.</a>
+<br>
+&nbsp;
+</p>
+<p><i>Known limitations and bugs:</i>
+</p>
+<p>- The complete data file is loaded into memory. Its size must
+therefore
+not exceed the memory of the computer.
+<br>
+- Practically no internal checks are done for sufficient memory. This
+may lead to crashes if more memory is needed than available.
+<br>
+- Sometimes the program may crash if it is attempted to read a data
+file in a format that is not supported.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><a name="Installation"></a></p>
+<h3>1.1. Installation</h3>
+No special installation or registration is needed. <font size="+1">Ana</font>
+is contained in the single <tt>ana.exe</tt> file that can be launched
+from
+where you want. It might be convenient to have a pool of <a
+ href="#ParameterSettings">setting</a>
+files (*.set) in a dedicated folder.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+<p><a name="Subwindows"></a>
+</p>
+<h3>2. Subwindows</h3>
+More than 1 file can be loaded at the same time. The window for each
+file
+is divided into 3 subwindows. The <a href="#Tree">left subwindow</a>
+is
+mainly for a tree-like view of all traces of the file allowing their
+simple
+selection. The right part of each window is divided into 2 parts. In
+the
+<a href="#Traces">lower
+part</a> the currently selected data traces are plotted. In the
+<a href="#Results">upper
+half</a> various results of previous analysis or other information is
+displayed.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Subwindows">Up to '2. Subwindows'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Tree"></a>
+<h3>2.1. Tree window</h3>
+The tree window shows in the upper part an expandable tree structure of
+the data. The hirarchy is: Root-&gt;Series-&gt;Entry.
+<br>
+Each series is composed of several "entries". A file may contain many
+series'. The series' are numbered sequentially, starting from 1. Also
+the
+entries are numbered sequentially, and the entry numbers DO NOT START
+WITH
+"1" in each series. You can move within the tree using the arrow keys
+or
+using the mouse.
+<br>
+<a name="Selection"></a>For displaying a single entry or a whole
+series,
+the following rules apply:
+<br>
+If you have selected <tt>Update on moving in tree</tt> in the <a
+ href="#ParameterSettings">Settings-dialog</a>
+SINGLE ENTRIES are displayed in the <a href="#Traces">trace window</a>
+whenever the cursor is on them. Otherwise, single entries, are
+displayed
+only if you hit <tt>return</tt> or if you click the RIGHT mouse
+button.
+<br>
+The latter rule applies ALWAYS for whole series'.
+<p>The controls below the tree are explained in separate sections (i.e.
+the
+<a href="#ScalingDisplay">sliders</a> and the <a
+ href="#RelevantSegment">relevant
+segment)</a>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Subwindows">Up to '2. Subwindows'</a></th>
+    </tr>
+  </tbody>
+</table>
+</p>
+<h3>2.2. Traces window</h3>
+Here the actual, <a href="#Selection">currently selected</a> , data
+traces
+are normally displayed. In addition five vertical and two horizontal
+<a href="#Cursors">cursors</a>
+and a zero line are displayed. The time- and y-range that are displayed
+are changed as described in <a href="#ScalingDisplay">6. Scaling the
+display
+of the traces</a>.
+<br>
+The display and/or subtraction of leak-records ("P/N") is controlled
+as described in the
+<a href="#ParameterSettings">7. Parameter settings
+</a>section.
+<p>If you have performed <a href="#NoiseAnalysis">noise analysis</a>
+you
+can display the mean and the variance in the trace window by selecting
+<tt>View-&gt;LowerWindow-&gt;Noise</tt>.
+</p>
+<p>If you have performed <a href="#SpectralAnalysis">spectral analysis</a>
+you can display the spectrum in the trace window by selecting <tt>View-&gt;LowerWindow-&gt;Spectrum</tt>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Subwindows">Up to '2. Subwindows'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Filter"></a>
+</p>
+<h3>2.2.1. Filtering traces</h3>
+A Gaussian filter can be activated by inserting the desired frequency
+value
+(in Hz) in the corresponding field in the
+<a href="#ParameterSettings">parameter
+settings </a>dialog. Filtering does NOT change the data, but is only
+for
+display.
+<br>
+If you want to filter and change the data permanently, see <a
+ href="#PermanentFilter">8.3.
+Permanent filtering</a>.
+<br>
+For undoing such filtering, see <a href="#UndoingOperation">8.1.
+Undoing
+an erroneous operation : Exchange</a>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Subwindows">Up to '2. Subwindows'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Results"></a>
+<h3>2.3. Results window</h3>
+The upper right window can display various kind of information. The
+actual
+viewtype is selected in the menu point <tt>View</tt> (or via the
+toolbar).
+<p>If <tt>View-&gt;General</tt> is selected the following general
+information
+is displayed:
+<br>
+If the root in the <a href="#Tree">tree window</a> is selected,
+general
+information like filename, number of series and entries etc. are shown.
+<br>
+If a series in the <a href="#Tree">tree window</a> is selected,
+information
+about this series is displayed, including sample time, number of
+entries,
+gain, and a list in which for each entry is shown:
+<br>
+i) index
+<br>
+ii) the actual "x-value" of this segment. This depends on the <a
+ href="#RelevantSegment">relevant
+segment</a> and is either a voltage, a duration of the segment, the
+time-point
+of acquisition of this entry or its 0-based index. The "x-value" is
+used
+for export of analysis results and for the <a href="#SeriesFit">series
+fit</a>
+<br>
+iii) the mean current calculated between the 2 green<a href="#Cursors">
+cursors in the "trace" window</a>
+</p>
+<p>If <tt>View-&gt;SeriesFit</tt> is selected the results of the <a
+ href="#SeriesFit">series
+fit</a> are displayed. A common example of this is an 'I-V'.
+</p>
+<p>If <tt>View-&gt;StimWave</tt> is selected the pulse program that
+generated
+the data is shown as a table. The time and voltage values of the pulse
+program are used by some procedures to locate <a href="#Cursors">cursor
+</a>positions
+and they are used by some <a href="#LeakSubtraction">leak subtraction </a>procedures.
+The pulse program is also very important for the definition of the <a
+ href="#RelevantSegment">relevant
+segment</a>.
+</p>
+<p><a name="ResultsTable"></a>If <tt>View-&gt;Analysis Results Table</tt>
+is selected, a table of analysis results of the currently selected
+series
+is displayed. The first column contains the respective "x-value" that
+is
+determined by the <a href="#RelevantSegment">relevant segment</a> and
+is
+either a voltage, a duration of the segment, the time-point of
+acquisition
+of this entry or its 0-based index. The other columns are speciefied in
+the <a href="#ParameterSettings">settings dialog </a>and are values
+like
+initial value, mean, time constants etc. Importantly, the text of the
+table
+can be selected with the mouse and copied into the windows clipboard
+with
+a right button mouse click. Note that selecting <tt>Select All</tt> in
+the popup menu that pops up with a right button click AUTOMATICALLY
+ALSO
+COPIES EVERYTHING INTO THE WINDOWS CLIPBOARD.
+</p>
+<p>If <tt>View-&gt;Stimwave</tt> is selected, the pulse protocol of
+the currently
+selected series is displayed. If you wish you can change it with the <tt>Edit-&gt;Stimwave</tt>
+command. See <a href="#EditStimwave">17.1. Changing the pulse protocol
+("Stimwave")</a>
+</p>
+<p>If <tt>View-&gt;ShowSomePoints</tt> is selected, data points around
+the
+left green <a href="#Cursors">cursor</a> (left column) and the right
+green
+<a href="#Cursors">cursor</a>
+(right column)are shown of the currently selected entry are shown. The
+values are the zero-based index and the current in pA. See <a
+ href="#Cursors">4.
+Cursors in the "trace" window</a> how to move the cursors. The arrows
+indicate
+the position of the respective cursor.
+</p>
+<p>If <tt>View-&gt;AmplitudeHistogram</tt> is selected, the all-points
+histogram
+is displayed if this has been constructed previously (see <a
+ href="#AmplitudeHistogram">14.1.
+Amplitude Histogram and Gaussian Fit</a>)
+</p>
+<p>If <tt>View-&gt;BetaDistributionFit</tt> is selected,...
+</p>
+<p>If <tt>View-&gt;LorenzFit</tt> is selected, a log-log plot of the
+power
+spectrum together with a fit with the sum of Lorentzians is shown, if
+it
+has been previously constructed (see <a href="#SpectralAnalysis">15.
+Spectral
+analysis</a>).
+</p>
+<p>If <tt>View-&gt;DwellTimeHistos</tt> is selected, log-plots of
+cumulative
+dwell-time histograms of the various single channel conductance levels
+are shown if these have been previously constructed (see <a
+ href="#DwellTimes">14.3.
+Dwell time analysis</a>).
+</p>
+<p>If <tt>View-&gt;VarMean</tt> is selected, the variance-mean plot of
+the
+non-stationary noise analysis together with a parabolic fit is shown if
+it has been previously constructed (see <a href="#NoiseAnalysis">13.
+Noise
+analysis</a>).
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Subwindows">Up to '2. Subwindows'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="RelevantSegment"></a>
+</p>
+<h3>3. The relevant segment</h3>
+In an IV-plot you plot current versus voltage. The relevant segment
+serves
+to "tell" the program which voltage shall be used for the IV-plot. It
+is
+taken from the voltage-protocol that was used to generate the series
+(see
+<a href="#Results">2.3.
+Results window</a> to get info on the voltage-protocol).
+<br>
+Note that counting starts with zero, i.e. the first segment has index
+0.
+<br>
+The relevant segment is selected either in the control in the lower
+part of the <a href="#Tree">Tree window</a> or in the <a
+ href="#ParameterSettings">Parameter
+settings</a> dialog.
+<br>
+If you do not want to use the voltage of a segment as the "x-value"
+but rather its duration as would be the case in "recovery from
+inactivation"
+protocols, you have to uncheck the <tt>Segment Voltage (else: segment
+duration)</tt>
+box in the <a href="#ParameterSettings">Parameter settings</a>.
+<br>
+If you want to analyze the series data not as a function of voltage
+or segment duration but rather as a function of the absolute time of
+the
+acquisition of the entries or as a function of the index within the
+series,
+you have to select "-2" or "-1" respectively as the relevant segment.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+<p><a name="Cursors"></a>
+</p>
+<h3>4. Cursors in the "trace" window</h3>
+There are 5 vertical (2 green, 2 red and one blue) and two (red)
+horizontal
+cursors in the <a href="#Traces">Traces window</a>. One of each group
+(i.e.
+one vertical and one horizontal) cursor is SELECTED, implying that its
+color is gray and that its movement can be controlled by the keyboard
+(see
+below). You can toggle with the <tt>SPACE</tt> bar the currently
+SELECTED
+cursor.
+<br>
+Vertical cursors are moved by the mouse (LEFT BUTTON!) and the selected
+(gray) cursor can additionally be moved with the LEFT and RIGHT arrow
+keys
+in combination with either the SHIFT key (fine movement) or the CONTROL
+key (coarse movement) (see <a href="#Shortcuts">5. Short-cut keys</a>
+for
+an overview of frequently used key-commands).
+<br>
+Attention: if you try to move a cursor by dragging with the left mouse
+button it may happen that you don't grasp it correctly and that you
+instead
+select a small display range (or vice-versa) (see <a
+ href="#ScalingDisplay">6.
+Scaling the display of the traces</a>). The best thing to do in that
+case
+is to press <tt>Ctrl+Z</tt> in order to undo the display scale setting
+(see <a href="#UndoParameters">7.4. Undoing a parameter settings change</a>).
+<br>
+Horizontal cursors are moved with the right mouse button and the
+SELECTED
+(gray) horizontal cursor can additionally be moved by
+SHIFT+ARROWUP(DOWN)
+(fine movement) and PAGE-UP(DOWN) (coarse movement)(see <a
+ href="#Shortcuts">5.
+Short-cut keys</a> for an overview of frequently used key-commands).
+<p>The horizontal cursors serve (so far) for only one purpose: to
+measure
+amplitudes of any kind "by eye". The difference between the two
+corresponding
+values of the horizontal cursors is displayed as "cursors" if <tt>View-&gt;General</tt>
+is currently selected and if a single entry is displayed. (see <a
+ href="#Results">2.3.
+Results window</a>).
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><a name="Shortcuts"></a></p>
+<h3><a name="5._Short-cut_keys"></a>5. Short-cut keys</h3>
+Many shortcuts are found in the menus. Since Sept. 2005 Ctrl+C or <span
+ style="font-family: monospace;">Edit-&gt;Copy </span>(Copy) has a new
+behavior in certain situations: If in the upper right window (the <a
+ href="#Subwindows">results-window) </a>text in a gray results-field
+is selected, and if the results-window is active (i.e. the selection is
+visible), the short-cut "<span style="font-family: monospace;">Ctrl+C</span>"
+(or <span style="font-family: monospace;">Edit-&gt;Copy</span>) copies
+this text into the general Windows clipboard. It will not copy the
+selected tree item into the <a
+ href="#8._Editing_comands_-_The_internal_buffer">buffer </a>as is
+instead normally done by the <a href="#Copying">Copy</a> command.<br>
+<br>
+Some shortcuts are listed below:
+<p><b><a href="#Cursors">Cursor</a> movement: </b>With <tt>space</tt>
+the
+active (gray) <a href="#Cursors">cursor</a> is toggled
+<br>
+Move the selected (gray) vertical <a href="#Cursors">cursor</a> with
+<tt>Shift+Left/right
+arrow</tt> for a fine movement and with <tt>Ctrl+left/right arrow</tt>
+for a coarse movement.
+<br>
+<tt>Alt+LeftArrow(RightArrow)</tt>: Move ALL <a href="#Cursors">cursors</a>
+corresponding to the time increment of the relevant stimulation segment
+<br>
+<tt>Shift+Arrowup(Arrowdown)</tt>: Move selected horizontal <a
+ href="#Cursors">cursor</a>
+by about one pixel
+<br>
+<tt>PgUp(PgDown)</tt>: Move selected horizontal <a href="#Cursors">cursor</a>
+by about 50 pixel
+</p>
+<p><b>Data Editing: </b>Arrow keys: move in the tree (if tree
+sub-window
+is active);
+<br>
+Right mouse click or <tt>return</tt> in the data tree: activate the
+selected item for display and analysis;
+</p>
+<p><b>Misc.: </b>Plus (minus) key on keypad: Double (reduce to half)
+display
+gain
+<br>
+<tt>Ctrl+PgUp(Down)</tt>: Shift the traces up/down
+<br>
+With <tt>del</tt> the currently selected item of the tree window is
+deleted; see <a href="#Copying">8.2.
+Copying/pasting/cutting/deleting/merging
+traces and series</a>
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><a name="ScalingDisplay"></a></p>
+<h3>6. Scaling the display of the traces</h3>
+The traces can be scaled up/down by the <tt>+/-</tt> key of the
+keypad,
+or by the corresponding toolbar buttons. The display gain can be
+defined
+also in the <a href="#ParameterSettings">Parameter settings</a>
+dialog.
+Traces can be shifted up or down by check <tt>Ctrl+PgUp/PgDown</tt> or
+by the arrow buttons in the toolbar or by defining the value of the
+y-offset
+in the <a href="#ParameterSettings">Parameter settings</a> dialog.
+<br>
+The visualized time-range can be selected by the slider controls of
+the <a href="#Tree">Tree window</a>. It can be scrolled through also
+with
+these controls. The time-range can also be defined in the <a
+ href="#ParameterSettings">Parameter
+settings</a> dialog.
+<p>An easy way to select a rectangle for enlargement is to define it
+directly
+with the mouse (keeping the left mouse button pressed). Since also the
+vertical <a href="#Cursors">cursors</a> are moved with the left mouse
+button
+pressed you have to make sure that the starting edge of the rectangle
+does
+not overlap with a vertical <a href="#Cursors">cursor</a>.
+<br>
+It may happen that you erroneously selected a too small region and
+you would like to return to the previous display settings: just hit <tt>Ctrl+Z</tt>
+(or the undo button of the toolbar) . A circular buffer keeps the last
+20 display (and all other) settings in memory. With <tt>Shift+Z</tt>
+you
+can redo the changes in the settings. See also the menu items <tt>Edit-&gt;Undo</tt>
+and <tt>Edit-&gt;Redo</tt>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><a name="ParameterSettings"></a><b><font size="+1">7. Parameter
+settings</font></b>
+<br>
+Several parameters that concern
+<a href="#ScalingDisplay">display settings
+</a>,
+<a href="#Cursors">cursor
+positions </a>, definition of fit functions, many switches and other
+parameters
+are kept in the Parameter Settings structure that can be saved in a
+settings
+file (.set) and reloaded in several ways. The last settings file that
+has
+been stored by ana is automatically loaded at the next execution.&nbsp;<a
+ name="EditingParameters"></a>
+</p>
+<h3>7.1. Editing parameters</h3>
+The parameters are accessible in various ways:
+<br>
+Display parameters are most commonly changed as described in
+<a href="#ScalingDisplay">display
+settings </a>.
+<br>
+Cursor positions are determined as described in
+<a href="#Cursors">cursor
+positions </a>.
+<br>
+The "General Parameters" dialog is recalled by <tt>Settings-&gt;General</tt>,
+or by <tt>Ctrl+A</tt> or by the corresponding toolbar button. Here you
+can change:
+<p>- the display gain, Offset x (left and right) (for the time range),
+Offset Y (see also <a href="#ScalingDisplay">display settings </a>);
+</p>
+<p>- <a href="#RelevantSegment">the relevant segment</a>;
+</p>
+<p>- the "<tt>noise margin" (times SD)</tt>: this value is used in the
+selection of records in the
+<a href="#NoiseAnalysis">noise analysis</a>.
+The higher the value, the more tolerant is the automatic procedure for
+the rejection of "bad" traces;
+</p>
+<p>- the "<tt>Scale Var Trace</tt>": if you display in the <a
+ href="#Traces">trace
+window</a> the result of a <a href="#NoiseAnalysis">noise analysis</a>
+this parameter is used to scale the display gain of the variance trace;
+</p>
+<p>- "<tt>SD Gaussian noise / pA</tt>": with the command <tt>Edit-&gt;rarely
+used-&gt;Add white noise</tt> gaussian noise can be added to the
+traces. The
+SD of this added noise (in pA) is defined here;
+</p>
+<p>- "<tt>number of components</tt>": this value determines the number
+of terms for various kinds of fits: For
+<a href="#ExponentialFit">exponential
+fits</a> it determines the number of exponential components. For <a
+ href="#Polynomial">polynomial
+fits</a> it determines the number of coefficients;
+</p>
+<p>- "<tt>Filter (Hz)</tt>": this value defines the value used for the
+digital Gaussian <a href="#Filter">filter</a>. A value of 0 dictates
+that
+no filtering is to be done;
+</p>
+<p>- "<tt>ABF gain factor</tt>": When reading Axon Binary Format files,
+there was sometimes a problem with the gain. The value defined in this
+field is used to multiply the gain found in the ABF file, and serves to
+get correct current values. This parameter is now obsolete. See also <a
+ href="#SupportedFiles">18.1.
+Supported
+data file types</a>;
+</p>
+<p>- "<tt>Line Frequency</tt>": If you use the <a href="#Manual50Hz">manual
+line frequency (50/60 Hz) subtraction</a> at this point is the initial
+value of the used line-frequency defined.
+</p>
+<p>In the column of check boxes on the right you define which values
+are
+written on a file when you <a href="#ExportAnalysis">export analysis
+results
+(mean, tau, peak, etc)</a>. The same values are diplayed when you
+select
+<tt>View-&gt;Analysis
+Results Table</tt> in the
+<a href="#Results">results window</a>.
+</p>
+<p>The remaining check boxes define the following behavior:
+</p>
+<p>- "<tt>Use SD for idealize</tt>": if this checkbox is NOT checked,
+the
+algorithm for <a href="#Idealization">single channel idealization</a>
+uses
+a simple 50% threshold criterion. If the checkbox IS checked, the
+idealization
+algorithm uses the width (SD) of the peaks of the gaussians of the <a
+ href="#AmplitudeHistogram">amplitude
+histogram</a> in order to decide to which of the peaks a given data
+point
+most likely corresponds.
+</p>
+<p>- "<tt>Update on moving in tree</tt>": If this checkbox is checked
+and
+you select an ENTRY in the <a href="#Tree">tree window</a> by moving
+the
+arrow keys or by selecting with the mouse, the display in the trace
+window
+is updated. If not checked, the display is ONLY updated if you hit <tt>return</tt>
+or click the right mouse button within the <a href="#Tree">tree window</a>.
+</p>
+<p>- "<tt>Leak subtract</tt>": If a leak trace is stored in your data
+file
+together with the data trace (as is e.g. the case in HEKA-Pulse files
+when
+you use P/N) you can decide with this checkbox if you want to subtract
+the leak or not.
+</p>
+<p>- "<tt>Show Leak</tt>": If a leak trace is stored in your data file
+together with the data trace (as is e.g. the case in HEKA-Pulse files
+when
+you use P/N) you can decide with this checkbox if you want to show it
+as
+a green trace or not.
+</p>
+<p>- "<tt>Draw lines</tt>": if checked, traces are drawn by connecting
+the individual data points by a line, otherwise they are shown as dots.
+</p>
+<p>- "<tt>Segment Voltage (else: segment duration)</tt>": if checked,
+the
+voltage of the
+<a href="#RelevantSegment">the relevant segment</a> is used
+as the "x-value" for
+<a href="#SeriesFit">series fits</a> and for
+<a href="#ExportAnalysis">exporting
+analysis results (mean, tau, peak, etc)</a>. Otherwise its duration is
+used as the x-value (see also
+<a href="#RelevantSegment">3. The relevant
+segment</a>).
+</p>
+<p>- "<tt>Use 2nd trace (reading pulse-files)</tt>": if checked and if
+you read a HEKA-Pulse data file, and if you have recorded TWO input
+channels,
+the second channel is read into <font size="+1">Ana</font>. Otherwise,
+the
+first channel is used.
+</p>
+<p>- <tt>"Show Time"</tt>:&nbsp; if checked in the<a href="#Results">
+general
+view</a> the "Unix" time in seconds is displayed for series and
+entries.
+</p>
+<p>-"<tt>Show Stop Button</tt>": Sometimes you would like to be able to
+interrupt lengthy erroneously evoked operations by a mouse click. For
+example
+you are fitting too many traces with too many exponentials. If this
+option
+is checked, a "Stop-Button" appears for several actions. It does not
+work,
+however, perfectly and in particluar it seems to be quite incompatible
+with Windows2000.
+</p>
+<p>- <tt>"Log scale in dwell time histo"</tt>:&nbsp; if checked the
+vertical
+scale in the <a href="#DwellTimes">dwell time histograms</a> is in log
+scale, otherwise it's linear.
+</p>
+<p>- <tt>"Dimmed overlay"</tt>:&nbsp; if checked the traces of a
+series
+are drawn in grey, except the last one that remains black Otherwise all
+traces are black.
+</p>
+<p>-"<tt>pick events with right button</tt>": normally the right mouse
+button is used in the trace-window to move the horizontal cursors. If,
+however, this check-box is clicked, idealized single-channel events can
+be <a href="#ManualEditing">manually edited with the right mouse button</a>.
+</p>
+<p><a name="SeriesFitDiag"></a>Parameters that are relevant for a
+<a href="#SeriesFit">series
+fit</a> are accessible in a dialog that is activated by <tt>Edit-&gt;SeriesFit
+Settings</tt> or <tt>Ctrl+G</tt> or by the corresponding toolbar
+button.
+The meaning of the various parameters is described in the
+<a href="#SeriesFit">series
+fit</a> chapter.
+</p>
+<p>Other settings are:
+</p>
+<p>-"<tt>Settings-&gt;Hide/Show Cursors (Ctrl+H)</tt>" that toggles
+on/off
+the display of the
+<a href="#Cursors">cursors in the "trace" window</a>.
+</p>
+<p>-"<tt>Settings-&gt;Hide/Show Zero line</tt>" that toggles on/off the
+display
+of the zero line.
+</p>
+<p>-"<tt>Settings-&gt;Dwell Time Settings (Ctrl+W)</tt>" are described
+in
+<a href="#DwellTimes">14.3.
+Dwell time analysis</a>.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#ParameterSettings">Up to '7. Parameter Settings'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="LoadingParameters"></a>
+</p>
+<h3>7.2. Loading/Saving</h3>
+The parameter settings can be saved on a binary file (<tt>Ctrl+S,
+Settings-&gt;Save
+Settings, toolbar</tt>) and loaded from these files (<tt>Ctrl+L,
+Settings-&gt;Load
+Settings, toolbar</tt>). The last settings file that was stored is
+automatically
+loaded at the next execution. (The filename is saved in the <tt>ana.ini</tt>
+file that is in the windows directory). You can prepare several
+standard
+setting files for various purposes.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#ParameterSettings">Up to '7. Parameter Settings'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="ContextSensitiveParameters"></a>
+<h3>7.3. Context sensitive parameters</h3>
+Sometimes you might want to save a set of parameters (that partially
+include
+also results of analysis) in association with a specific entry or
+series.
+Having selected the desired series/entry and pressing X (or <tt>Settings-&gt;Save
+Context Set</tt>) opens a file dialog for saving a set-file with a name
+derived uniquely from the data file name and the index of the series or
+entry. For reloading such a setfile you just press Y (or<tt>
+Settings-&gt;Load
+Context Set</tt>) and a file dialog with the same set-filename as
+default
+appears and hitting return will load it. You can of course also load
+any
+other set file thru this command.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#ParameterSettings">Up to '7. Parameter Settings'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="UndoParameters"></a>
+<h3>7.4. Undoing a parameter settings change</h3>
+If you have e.g. erroneously selected an unfavorable display setting,
+or
+you just want to return to some previous <a href="#Cursors">cursor</a>
+settings: just hit <tt>Ctrl+Z</tt> (or the undo button of the toolbar)
+. A circular buffer keeps the last 20 display (and all other) settings
+in memory. With <tt>Shift+Z</tt> you can redo the changes in the
+settings.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#ParameterSettings">Up to '7. Parameter Settings'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="EditingCommands"></a>
+<h3><a name="8._Editing_comands_-_The_internal_buffer"></a>8. Editing
+commands - The internal buffer</h3>
+An internal buffer keeps in memory a single entry or a whole series. It
+works somewhat similar as the windows clipboard but is completely
+distinct.
+In particular it is defined only within a single instance of <font
+ size="+1">Ana</font>
+and it exists in parallel to the windows clipboard. You can use it to
+transfer
+data from one file to another, to delete traces, series and so on. An
+important
+application is that in most cases when a data-changing operation is
+performed,
+like e.g. <a href="#PermanentFilter">permanent filtering</a> or
+deleting
+of a stretch, or scaling, the original data are copied into the buffer
+and the operation can be undone using the "<b>exchange</b>" mechanism
+(see
+<a href="#UndoingOperation">8.1.
+Undoing an erroneous operation : Exchange</a>).
+<br>
+<b>Important Note:</b> Only the raw data and no analysis results (like
+series fit, noise, fits, ...) are saved in the internal buffer. Any of
+such information is lost!
+<br>
+<br>
+In order to highlight entries in the tree (single entries or whole
+sweeps) that have been altered by a data changing operation, such
+entries are displayed in the tree with a differently colored icon. This
+"altered" status can be explicitly reset with <span
+ style="font-family: monospace;">Changed-&gt;Remove "Changed" Status</span>.
+Saving the file will also reset this flag. <br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+<p><a name="UndoingOperation"></a>
+</p>
+<h3>8.1. Undoing an erroneous operation : Exchange</h3>
+Many operations permanently change the data (scaling, permanent
+filtering,
+cutting, undersampling, deleting a stretch, subtracting leak,
+exchanging
+data with fit, subtracting capacitance, subtracting line-frequency, and
+some others) and sometimes you realize (hopefully immediately) that you
+would like to undo an operation. Fortunately, <font size="+1">Ana</font>
+makes a copy of the original data and stores it in the <a
+ href="#EditingCommands">internal
+buffer</a>. Doing so, it overwrites (without asking) the previous
+contents
+of the internal buffer. So you can undo only the last operation. For
+undoing
+you have to select within the data tree the corresponding item (series
+or entry) and then click <tt>Edit-&gt;Exchange</tt> or type <tt>Z</tt>
+or
+click on the double-arrow in the toolbar.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Copying"></a>
+<h3>8.2. Copying/pasting/cutting/deleting/merging traces and series</h3>
+With <tt>Ctrl+C</tt> (or <tt>Edit-&gt;Copy</tt> ) you copy the
+currently selected
+item of the data tree into the <a href="#EditingCommands">internal
+buffer</a>,
+overwriting (without confirming) the current contents of the buffer.
+This
+applies only to single entries or single series (<span
+ style="font-weight: bold;">Note</span>: under certain circumstances <span
+ style="font-family: monospace;">Ctrl+C</span> or <span
+ style="font-family: monospace;">Edit-&gt;Copy</span>, will copy
+selected text in gray windows as described <a href="#5._Short-cut_keys">here</a>).
+The <a href="#EditingCommands">internal
+buffer</a> does not take more than one series, i.e. you can not copy
+the
+root.
+<br>
+<br>
+<b>Important Note:</b> Only the raw data and no analysis results (like
+series fit, noise, fits, ...) are saved in the <a
+ href="#EditingCommands">internal
+buffer</a>. All this information is lost passing through the buffer!
+<br>
+<br>
+With <tt>del</tt> the currently selected item is deleted without
+making
+a copy and thus without overriding the contents of the buffer while
+with
+<tt>Ctrl+X,
+Edit-&gt;Cut</tt> the item is deleted and copied into the buffer. The
+contents
+of the buffer can be pasted before (<tt>Ctrl+V, Edit-&gt;Paste Before</tt>)
+or after (<tt>Ctrl+T, Edit-&gt;Paste after</tt>) the currently selected
+item.
+If a series with several entries is currently stored in the <a
+ href="#EditingCommands">buffer</a>
+these can be merged after the currently selected entry of the tree
+window
+by <tt>Edit-&gt;Merge entries after</tt>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="PermanentFilter"></a>
+<h3>8.3. Permanent filtering</h3>
+By specifying a filter frequency (larger than 0 and smaller than the
+sampling
+frequency) in the <a href="#ParameterSettings">parameter settings</a>
+the
+data are filtered only for display each time before display without
+changing
+the original data. You can perform a permanent, data-changing filtering
+by <tt>F12</tt> or <tt>Edit-&gt;Filter</tt>. The original data are
+copied
+into the
+<a href="#EditingCommands">internal buffer</a> and as long as
+nothing else is copied into the <a href="#EditingCommands">internal
+buffer</a>
+the filtering can be undone by the <a href="#UndoingOperation">"Undoing
+an erroneous operation : Exchange"</a> mechanism.
+<p>You can also filter the whole file (i.e. all series') by <tt>Edit-&gt;Filter
+whole file (Ctrl+F12)</tt> but as the <a href="#EditingCommands">internal
+buffer</a> contains at most 1 series, this command cannot be undone.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Undersample"></a>
+</p>
+<h3>8.4. Undersampling</h3>
+Undersampling by a factor of "n" means to take only every n'th point
+and
+to throw away the others. This reduces the number of points by a factor
+of n. This can be done by <tt>Edit-&gt;Undersample</tt> or <tt>F10</tt>.
+A
+filtering effect can be achieved if you use <tt>Edit-&gt;Undersample
+And Average</tt>.
+The original data are copied into the
+<a href="#EditingCommands">internal
+buffer</a> and as long as nothing else is copied into the <a
+ href="#EditingCommands">internal
+buffer</a> the undersampling can be undone by the <a
+ href="#UndoingOperation">"Undoing
+an erroneous operation : Exchange"</a> mechanism.
+<p>You can also undersample the whole file (i.e. all series') by <tt>Edit-&gt;Undersample
+whole file (Ctrl+F10)</tt> but as the <a href="#EditingCommands">internal
+buffer</a> contains at most 1 series, this command cannot be undone.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Average"></a>
+</p>
+<h3>8.5. Calculating the average</h3>
+With <tt>Edit-&gt;Calculate Mean</tt> (or <tt>F3</tt>) the average of
+the
+selected entries is calculated and placed in the <a
+ href="#EditingCommands">internal
+buffer</a> from where it can be <a href="#Copying">pasted</a>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="ExtractRecords"></a>
+<h3>8.6. Copying selected records</h3>
+With <tt>Edit-&gt;Copy (Ctrl+C)</tt> the currently selected entry (if
+an entry
+is selected in the <a href="#Tree">Tree window</a>) or the currently
+selected
+series (if a series is selected in the <a href="#Tree">Tree window</a>)
+is copied into the <a href="#EditingCommands">internal buffer</a> from
+where it can be <a href="#Copying">pasted</a>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Concat"></a>
+<h3>8.7. Concatenate entries</h3>
+Several entries can be concatenated by this command (<tt>Edit-&gt;Concatenate</tt>)
+into a single entry that is placed into the <a href="#EditingCommands">internal
+buffer</a> from where it can be <a href="#Copying">pasted</a>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="DeleteStretch"></a>
+<h3>8.8. Deleting a stretch</h3>
+The data stretch between the green <a href="#Cursors">cursors</a> can
+be deleted
+by <tt>F8</tt> or <tt>Edit-&gt;Delete piece between green cursors</tt>.
+The
+original trace(s) is(are) copied into the <a href="#EditingCommands">internal
+buffer</a> allwoing to <a href="#UndoingOperation">undo</a> the
+deletion.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="ExtractStretch"></a>
+<h3>8.9. Extracting a stretch</h3>
+The data stretch between the green <a href="#Cursors">cursors</a> can
+be
+extracted (<tt>F9</tt> or <tt>Edit-&gt;Extract piece between green
+cursors</tt>
+) and copied into the
+<a href="#EditingCommands">internal buffer</a> from
+where it can be <a href="#Copying">pasted</a>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Overlayenvelope"></a>
+<h3>8.10. Overlay envelope</h3>
+Sometimes time increments or decrements are used in the pulse
+protocols,
+e.g. in recovery from inactivation protocols. The "relevant" or
+interesting
+segment then may not stay "within" the cursors for the analysis when
+viewing
+the traces. Data recorded by HEKA-pulse (I think not pclamp-data) have
+a variable number of samples for each record in such cases. This allows
+the following trick: applying the <tt>Even more analysis-&gt;overlay
+envelope</tt>
+command <font size="+1">Ana</font> adds zeros to the beginning of each
+trace
+such that all traces will have the same number of samples resulting in
+a perfect superposition of the segments after the variable-length
+period.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="SwapDataFit"></a>
+<h3>8.11. Swapping data and fit</h3>
+If a <a href="#TraceFitting">trace fit</a> has been performed, that is
+shown in blue, the blue, fitted, stretch can be swapped with the
+corresponding
+data stretch by the command
+<tt>Even more analysis-&gt;Swap data-fit</tt>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="ReverseTime"></a>
+<h3>8.12. Reverse time</h3>
+With this command (shortcut = <tt>Shift+T</tt>) you can reverse the
+time
+of one or more entries. This could be useful to test if your
+(single-channel)
+analysis depends on the direction of time or, more profanely, you can
+use
+this to extrapolate a fit not to a previous time point but to later
+times.
+If more than one entry is subjected to the time-reversal you can chose
+to reverse also the order of the entries to get a complete time
+reversal,
+or not. In the former case the pulse-protocol (if varying voltages or
+times
+are involved) WILL NOT BE VALID AFTER THE REVERSAL!
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="PasteAsFit"></a>
+<h3>8.13. Paste as fit</h3>
+With the command <tt>Edit-&gt;Paste as fit</tt> (shortcut = <tt>F5</tt>)
+the
+<a href="#EditingCommands">internal
+buffer</a> content is pasted as a <a href="#TraceFitting">trace
+fitting
+(i.e. a blue line)</a> overriding any fit present, starting at the
+beginning
+of the trace! With <tt>Edit-&gt;Paste as fit between green cursors (</tt>shortcut
+= <tt>Ctrl+F5</tt>) the
+<a href="#EditingCommands">internal buffer</a>
+content is pasted as a fit only between the green cursors.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#EditingCommands">Up to '8. Editing commands - The
+internal
+buffer'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="TraceFitting"></a>
+<h3>9. Trace fitting</h3>
+The data traces can be fitted by a variety of functions, in particular
+exponential functions with various constraints, polynomials, and, using
+an equation-parser, any <a href="#UserDefined">user-defined function </a>.
+<p><b>The following general rules apply:</b>
+</p>
+<p>The fit is displayed on top of the data in blue color.
+</p>
+<p>Fitting is performed using the Simplex algorithm (except for the
+polynomials
+that are calculated directly). The number of iterations and the
+stepsize
+are defined in the <a href="#SeriesFitDiag">Series Fit parameters
+dialog
+</a>.
+</p>
+<p>The fit is applied to a single entry if a single entry is selected
+in
+the <a href="#Tree">tree window</a> or to a group of entries within a
+series
+if a series is selected in the <a href="#Tree">tree window</a>.
+</p>
+<p>The trace is fitted between the two green <a href="#Cursors">cursors</a>,
+i.e. the parameters of the fitted function depend on the data values
+between
+the green <a href="#Cursors">cursors</a>.
+</p>
+<p>If the blue cursor is located to the left of the left green <a
+ href="#Cursors">cursor</a>,
+the fit is extrapolated up to the blue <a href="#Cursors">cursor</a>.
+This
+is for example used to estimate the initial current value after a
+voltage
+jump that is disturbed by a capacitive artifact.
+</p>
+<p>A single entry can "contain" only a single fit. A new trace fit
+overrides
+the old one. This implies that all <a href="#ResultsTable">results</a>
+values that depend on the fit are also overwritten (e.g. the "initial
+value").
+</p>
+<p>The fits are saved on the <a href="#SavedFile">file</a> if it is
+saved.
+</p>
+<p>If entries are <a href="#Copying">copied</a> into the <a
+ href="#EditingCommands">internal
+buffer </a>, the fit is not copied.
+</p>
+<p>The data trace and the fit can be "<a href="#SwapDataFit">exchanged"</a>.
+This does, however, not lead to a recalculation of the initial value or
+other values that depend on the parameters of the fit.
+</p>
+<p>The entries of the <a href="#EditingCommands">internal buffer </a>can
+be "<a href="#PasteAsFit">pasted as fit</a>", i.e. any old fit trace is
+overwritten and the pasted trace is shown in blue. Pasting starts from
+the first data point (i.e. the position of the cursors have no
+influence).
+This is used mainly for display purposes. It does not lead to a
+recalculation
+of the initial value or other values that depend on the parameters of
+the
+fit.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><a name="ExponentialFit"></a></p>
+<h3>9.1. Exponential fits</h3>
+In all exponential fits traces are fitted by functions of the form
+<p>a0 + a1&times;exp(-t/tau1) + a2&times;exp(-t/tau2) + ... +
+an&times;exp(-t/taun)
+</p>
+<p>n, the number of exponentials, must be at least 1. It is determined
+in the <a href="#ParameterSettings">general parameter settings dialog</a>
+as "number of components". The time point 0 is determined by the left
+green
+<a href="#Cursors">cursor</a>
+if the blue <a href="#Cursors">cursor</a> is located to the right of
+it
+and otherwise by the position of the blue
+<a href="#Cursors">cursor</a>
+(used for backextrapolation, see <a href="#Cursors">4. Cursors</a>).
+In
+a simple full free exponential fit (<tt>Ctrl+E</tt>, toolbar) all
+parameters
+(ai, taui) are freely fitted, while several specially constrained
+exponential
+fits are described below. Of particular importance is the <a
+ href="#CommonExponentialFit">common
+exp fit</a> which is used to fit the same time constant(s) for all
+entries
+in a constant-voltage tail protocol to extract the steady state popen
+from
+tail currents. The parameters (see "initial value (from fit)", "fast
+tau",
+"slow tau", "very slow tau", "coefficients", in the <a
+ href="#ParameterSettings">general
+parameter settings dialog</a>) of exponential fits can be <a
+ href="#ExportAnalysis">exported
+</a>on
+a file or displayed as a <a href="#ResultsTable">table</a> and
+selected
+with the mouse. The initial values for the time constants are guessed
+based
+on the time interval. Sometimes these guesses are not appropriate and
+manual
+intervention is necessary. In this case you can try to play with the
+stepsize
+and the number of iterations (see <a href="#TraceFitting">tracefitting</a>).
+If this does not help you can manually enter starting values by hitting
+"i" on the keyboard while the fit is running (this works only if the
+checkbox
+<tt>allow
+keyboard input in fit (</tt>see <a href="#SeriesFit">Series Fit</a>))
+in
+the series fit dialog is checked). If also this does not help you can
+try
+a <a href="#UserDefined">user-defined function</a> where the initial
+values
+have to be manually set. Note that the coefficients, ai, are not
+dependent
+on any initial value assumption as they are optimally calculated for a
+given set of time-constants.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#TraceFitting">Up to '9. Trace fitting'</a></th>
+      <th><a href="#ExponentialFit">Up to '9.1. Exponential Fits'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="SimpleExponentialFit"></a>
+</p>
+<h3>9.1.1. Simple exponential fit</h3>
+In a simple exponential fit all coefficients and time constants are
+freely
+fitted. See <a href="#ExponentialFit">'9.1. Exponential Fits'</a> for
+a
+general description.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#TraceFitting">Up to '9. Trace fitting'</a></th>
+      <th><a href="#ExponentialFit">Up to '9.1. Exponential Fits'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="CommonExponentialFit"></a>
+<h3>9.1.2. Fit several traces simultaneously with the same
+time-constants for
+all</h3>
+In this fit several entries are fitted simultaneously with the SAME
+time
+constant(s) for all entries. The coefficients are calculated
+individually
+for all entries. A frequently used protocol to estimate the
+steady-state
+voltage-dependence is to apply a pulse to a fixed voltage after
+prepulses
+to varying voltages. The initial current at the constant "tail" pulse
+is
+proportional to the open-probability at the end of the prepulse. The
+"common
+exp" fit is generally used to estimate the initial value by exponential
+fitting and backextrapolation. It yields also a good estimate of the
+time
+constant(s) at the fixed tail voltage.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#TraceFitting">Up to '9. Trace fitting'</a></th>
+      <th><a href="#ExponentialFit">Up to '9.1. Exponential Fits'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="OtherExponentials"></a>
+<h3>9.1.3. Other exponentials</h3>
+Somewhat differently treated from the normal sum of exponentials is the
+<b>product</b>
+of two exponentials (<tt>Analysis-&gt;Special Exps-&gt;fit product of
+two exps</tt>)
+because the coefficients have to be fitted too. A variant of this is <tt>Analysis-&gt;Special
+Exps-&gt; product of two exps, fix one</tt> in which one of the time
+constants
+is fixed.
+<p>In the normal "sum-of-exponentials fit", there is also the option to
+keep one time constant fixed, either for each trace singly (<tt>Analysis-&gt;Special
+Exps-&gt;fit exps, fix one</tt>) or keeping the same taus for all
+traces (<tt>Analysis-&gt;Special
+Exps-&gt;fit common exps, fix one</tt>; see <a
+ href="#CommonExponentialFit">9.1.2.
+Fit several traces simultaneously with the same time-constants for all</a>).
+</p>
+<p>Another option is to constrain the coefficients in a way to keep the
+initial derivative equal to zero:
+<br>
+<tt>dY/dt( t=0) = 0</tt>
+<br>
+Try <tt>Analysis-&gt;Special Exps-&gt;fit exps with DI(0)=0 (Ctrl+D)</tt>
+and <tt>Analysis-&gt;Special Exps-&gt;fit common exps with DI(0)=0</tt>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#TraceFitting">Up to '9. Trace fitting'</a></th>
+      <th><a href="#ExponentialFit">Up to '9.1. Exponential Fits'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Envelope"></a>
+</p>
+<h3>9.1.4. Envelope</h3>
+Not yet documented. But see: <a href="#Overlayenvelope">8.10. Overlay
+envelope</a>.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#TraceFitting">Up to '9. Trace fitting'</a></th>
+      <th><a href="#ExponentialFit">Up to '9.1. Exponential Fits'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Polynomial"></a>
+<h3>9.2. Polynomial</h3>
+The "number of components" in the <a href="#ParameterSettings">parameter
+settings</a> dialog determines the number of coefficients of the
+polynomial
+to be fitted, i.e. 1 corresponds to a horizontal line, 2 is a straight
+line, 3 is a parabola, etc. The coefficients can be visualized in the <a
+ href="#Results">Results
+window</a> from where they can be copied and pasted.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#TraceFitting">Up to '9. Trace fitting'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="UserDefined"></a>
+<h3>9.3. User defined</h3>
+With <tt>More Analysis-&gt;Fit trace with user function</tt> or <tt>Ctrl+U</tt>
+the fit of the trace(s) by an arbitrary user-defined function is
+invoked.
+The function is defined in the <a href="#SeriesFitDiag">series-fit
+dialog</a>.
+The time-variable can be written as "<tt>t</tt>" or as "<tt>v</tt>".
+The
+parameters of such a fit are written as <tt>a[0]</tt>, <tt>a[1]</tt>,
+etc.
+and the initial values are defined in the dialog invoked by clicking <tt>Settings-&gt;Edit
+Params</tt> or typing <tt>E</tt>. Here you also specify for each
+parameter
+if you want it to be adjusted (checking the corresponding "DoFit" box)
+or if it should remain fixed.
+<br>
+As an example you can compare the intrinsic exponential fit with the
+following user defined function:
+<p><tt>(a[0]+a[1]*exp(-t/a[2]))*1e-12</tt>
+<br>
+The factor 1e-12 here is just for convenience to keep the parameters
+a[0] and a[1] in pA. Time is always in SECONDS!
+<br>
+See <a href="#Syntax">18.3. Syntactic rules for the user-defined
+function</a>
+for the syntactic rules of the user-function.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#TraceFitting">Up to '9. Trace fitting'</a></th>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><a name="SeriesFit"></a></p>
+<h3>10. Series Fit</h3>
+Series fit means that you display and fit a particular value (e.g. the
+mean calculated between the 2 green <a href="#Cursors">cursors</a>)
+for
+all the entries of a series. The x-value can be either
+<p>- the voltage of the
+<a href="#RelevantSegment">relevant segment</a>
+(if the checkbox "<tt>Segment Voltage (else: segment duration)</tt>" in
+the
+<a href="#ParameterSettings">parameter settings dialog </a>is
+checked).
+</p>
+<p>- the duration of the
+<a href="#RelevantSegment">relevant segment</a>
+(if the checkbox "<tt>Segment Voltage (else: segment duration)</tt>" in
+the
+<a href="#ParameterSettings">parameter settings dialog </a>is NOT
+checked).
+</p>
+<p>- the entry-index (starting with 0 for the first entry) defined if
+you
+set the
+<a href="#RelevantSegment">relevant segment</a> to -1
+</p>
+<p>- the absolute time of acquisition of the entry (starting with 0 for
+the first entry) defined if you set the <a href="#RelevantSegment">relevant
+segment</a> to -2
+<br>
+&nbsp;
+</p>
+<p>The type of function to fit is selected in the <tt>Series Fit
+settings
+</tt>dialog
+(<tt>Ctrl+G</tt>) . The radio buttons on the top left of the dialog
+decide
+what function you want to fit. (see below for a precise definition). In
+the column of radio buttons on the right you select which value you
+want
+to fit. The other fields mean:
+</p>
+<p>- <b># components in poly fit</b>: The number of coefficients for a
+<a href="#PolynomialSeriesFit">Polynomial</a>
+fit.
+</p>
+<p>- <b>Maxiter</b>: the number of iterations in the fit.
+</p>
+<p>- <b>Stepsize</b>: the stepsize for the simplex search in the fit.
+</p>
+<p>- <b>User function</b>: here the user function is defined. It is
+used
+either by the <a href="#UserDefined">user defined trace fit</a> or by
+the
+<a href="#UserDefinedSeriesFit">User
+defined series fit</a>.
+</p>
+<p>- <b>Bin width ampl histo (in pA) </b>: The bin-width for the <a
+ href="#AmplitudeHistogram">Amplitude
+Histogram</a>
+</p>
+<p>- <b>Bin width dwellt. histo (in ms) </b>: The bin-width for the <a
+ href="#DwellTimes">Dwell
+time analysis</a>
+</p>
+<p>- <b>min dwelltime (ms)</b>: The minimal dwell-time for the <a
+ href="#DwellTimes">Dwell
+time analysis</a>
+</p>
+<p>- <b>Invert Y-data </b>: if checked the values to be analyzed are
+multiplied
+by -1.
+</p>
+<p>- <b>Equidistant gaussians </b>: if checked the peaks of the
+gaussians
+are equidistant in the <a href="#AmplitudeHistogram">Amplitude
+Histogram</a>
+</p>
+<p>- <b>Allow keyboard input in fit</b>: only if checked has keyboard
+input
+an influence during trace- and series-fit. With "s" the fit is
+interrupted.
+With "i" new initial values of the various parameters can be entered
+during
+fitting.
+</p>
+<p><b>The data values and the fit are shown in the upper window.
+Clicking
+with the right mouse button on the individual data points you can
+display
+the corresponding x and y value.</b>
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#SeriesFit">Up to '10. Series Fit'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Boltzmann"></a>
+</p>
+<h3>10.1. Boltzmann</h3>
+In a Boltzmann-fit the following function is fitted:
+<p><tt>offset + (Max-offset)/(1+exp( (v-V<sub>1/2</sub>)/k ))</tt>
+</p>
+<p>with the four parameters, <tt>offset</tt>, <tt>Max</tt>, <tt>V<sub>1/2</sub></tt>,
+and <tt>k</tt>. If you want to fit a different kind of function (e.g.
+fix
+the offset to 0) you have to use the <a href="#UserDefinedSeriesFit">User
+defined series fit</a>.
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#SeriesFit">Up to '10. Series Fit'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="PolynomialSeriesFit"></a>
+</p>
+<h3>10.2. Polynomial</h3>
+A polynomial is fitted with the number of coefficients, Ncoeff, as
+described
+above (see <a href="#SeriesFit">10. Series Fit</a>). With NCoeff=1 the
+mean is calculated (and displayed). With NCoeff=2 a straight line is
+fitted
+and assuming that the SeriesFit is an IV also the extrapolated reversal
+potential is calculated and displayed. With NCoeff=3 a parabola is
+fitted
+and assuming that the SeriesFit is an IV also the two possible
+extrapolated
+reversal potentials are calculated and displayed. For Ncoeff&gt;3 only
+the
+coefficients are displayed.
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#SeriesFit">Up to '10. Series Fit'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="UserDefinedSeriesFit"></a>
+<h3>10.3. User defined function</h3>
+The function is defined in the <a href="#SeriesFitDiag">series-fit
+dialog</a>.
+The independent variable can be written as "<tt>v</tt>" or as "<tt>t</tt>".
+The parameters of such a fit are written as <tt>a[0]</tt>, <tt>a[1]</tt>,
+etc. and the initial values are defined in the dialog invoked by
+clicking
+<tt>Settings-&gt;Edit
+Params</tt> or typing <tt>E</tt>. Here you also specify for each
+parameter
+if you want it to be adjusted (checking the corresponding "DoFit" box)
+or if it should remain fixed.
+<br>
+As an example you can compare the intrinsic <a href="#Boltzmann">Boltzmann
+fit</a> with the following user defined function:
+<p><tt>a[0]*(a[1]+(1-a[1])/(1 + exp((v-a[2])/a[3]))*1e-12</tt>
+</p>
+<p>The factor 1e-12 is to keep the parameter a[0] in pA. You can fix
+e.g.
+the "offset" to zero by entering a[1]=0 in the dialog and not fitting
+the
+value.
+<br>
+See <a href="#Syntax">18.3. Syntactic rules for the user-defined
+function</a>
+for the syntactic rules of the user-function.
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#SeriesFit">Up to '10. Series Fit'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="LeakCapac50Hz"></a>
+</p>
+<h3>11. Leak, capacity, and line frequency (50/60 Hz) subtraction</h3>
+Before these various subtractions, the original data are copied to the
+<a href="#EditingCommands">internal
+buffer</a> and the operations can be undone using the "<b>exchange</b>"
+mechanism (see
+<a href="#UndoingOperation">8.1. Undoing an erroneous operation
+: Exchange</a>).
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+<p><a name="BaselineSubtraction"></a>
+</p>
+<h3>11.1. Baseline subtraction</h3>
+With <tt>Leak Subtraction-&gt;subtract baseline</tt> or <tt>Ctrl+B</tt>
+the
+data between the two red <a href="#Cursors">cursors</a> is averaged
+and
+subtracted from the trace(s).
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#LeakCapac50Hz">Up to '11. Leak, capacity, and line
+frequency
+(50/60 Hz) subtraction'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="LeakSubtraction"></a>
+<h3>11.2. Leak subtraction</h3>
+<font size="-2">Ana</font> offers 2 possibilities to perform offline
+leak
+subtraction. The first is two subtract a scaled series of leak records,
+the second is based on a baseline segment ...
+<br>
+no help yet, sorry.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#LeakCapac50Hz">Up to '11. Leak, capacity, and line
+frequency
+(50/60 Hz) subtraction'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="SubtractScaledSeries"></a>
+<h3>11.2.1. Subtract a scaled series</h3>
+no help yet, sorry.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#LeakCapac50Hz">Up to '11. Leak, capacity, and line
+frequency
+(50/60 Hz) subtraction'</a></th>
+      <th><a href="#LeakSubtraction">Up to '11.2. Leak
+subtraction'&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="SubtractUsingBaseline"></a>
+<h3>11.2.2. Subtract using a baseline segment where channels are
+supposed to
+be closed</h3>
+no help yet, sorry.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#LeakCapac50Hz">Up to '11. Leak, capacity, and line
+frequency
+(50/60 Hz) subtraction'</a></th>
+      <th><a href="#LeakSubtraction">Up to '11.2. Leak
+subtraction'&nbsp;</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Capacity correction"></a>
+<h3>11.3. Capacity correction</h3>
+Suppose one segment of the stimulation pulse goes to a voltage where no
+current flows because the driving force is 0 (i.e. a step to the
+reversal
+potential). You can use this segment to subtract the capacity from
+other
+segments as in the following example. Suppose your protocol is like
+this:
+<p>segment 0: VHold, 10 ms
+<br>
+segment 1: VTest1, 10 ms
+<br>
+segment 2: VTest2, 5 ms
+<br>
+segment 3: VHOLD=EREV, 10 ms
+</p>
+<p>You can subtract the capacitive artefact from segments 1 and 2
+(if&nbsp;
+VTest1 and VTest2 are different from EREV). Let's do it for segment 1.
+Select the sweep (or series) where you want to subtract the capacity.
+Put
+the "relevant segment" to 1. Select "<tt>View-&gt;Put green cursors on
+segment</tt>"
+(<tt>Ctrl+-</tt>) to put the green cursors on segment 1.&nbsp; Select "<tt>View-&gt;Put
+red cursors on segment</tt>" (<tt>Ctrl+&lt;</tt>) to put the red
+cursors
+on segment 3!
+<br>
+Select "<tt>Leak Subtraction-&gt;Separated segments capacity correction</tt>"
+(<tt>Ctrl+F11</tt>) to subtract the capacity. Select "3" as the "leak"
+segment.
+<br>
+The original data are copied into the
+<a href="#EditingCommands">internal
+buffer</a> and as long as nothing else is copied into the <a
+ href="#EditingCommands">internal
+buffer</a> the subtraction can be undone by the <a
+ href="#UndoingOperation">"Undoing
+an erroneous operation : Exchange"</a> mechanism.
+<br>
+You can of course also manually put the cursors to fit exactly the
+start of the segment if there is an incongruence with the stimulation
+protocol.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#LeakCapac50Hz">Up to '11. Leak, capacity, and line
+frequency
+(50/60 Hz) subtraction'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="50HzSubtraction"></a>
+</p>
+<h3>11.4. line frequency (50/60 Hz) subtraction</h3>
+no help yet, sorry.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#LeakCapac50Hz">Up to '11. Leak, capacity, and line
+frequency
+(50/60 Hz) subtraction'</a></th>
+      <th><a href="#50HzSubtraction">Up to '11.4. line frequency (50/60
+Hz) subtraction'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Automatic50Hz"></a>
+<h3>11.4.1 Automatic line frequency (50/60 Hz) subtraction</h3>
+no help yet, sorry.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#LeakCapac50Hz">Up to '11. Leak, capacity, and line
+frequency
+(50/60 Hz) subtraction'</a></th>
+      <th><a href="#50HzSubtraction">Up to '11.4. line frequency (50/60
+Hz) subtraction'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Manual50Hz"></a>
+<h3>11.4.2 Manual line frequency (50/60 Hz) subtraction</h3>
+no help yet, sorry.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#LeakCapac50Hz">Up to '11. Leak, capacity, and line
+frequency
+(50/60 Hz) subtraction'</a></th>
+      <th><a href="#50HzSubtraction">Up to '11.4. line frequency (50/60
+Hz) subtraction'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="ScalingTraces"></a>
+<h3><b>12. Scaling traces</b></h3>
+<a name="ScalingFactorAndConstant"></a>
+<h3>12.1 Scaling by a factor and add a constant</h3>
+With the command <tt>MoreAnalysis-&gt;ScaleTrace</tt> (or via the
+toolbar)
+the selected entries are transformed by
+<br>
+<tt>x -&gt; m*x + b</tt>
+<br>
+with a factor <tt>m</tt> and a constant <tt>b</tt>. Note that <tt>b</tt>
+must be given in units of Ampere. The original data are copied into the
+<a href="#EditingCommands">internal
+buffer</a> and as long as nothing else is copied into the <a
+ href="#EditingCommands">internal
+buffer</a> the scaling can be undone by the <a href="#UndoingOperation">"Undoing
+an erroneous operation : Exchange"</a> mechanism.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#ScalingTraces">Up to '12. Scaling traces'</a></th>
+    </tr>
+  </tbody>
+</table>
+<h3>
+12.2 Scaling traces of a series to have a common value in a certain
+segment</h3>
+With the command <tt>MoreAnalysis-&gt;ScaleTails</tt> (or hitting "<tt>J</tt>")
+the entries are scaled in a way that the mean of the stretch delimited
+by the green <a href="#Cursors">cursors</a> is the same for all and
+corresponds
+to one that can be selected. This is e.g. useful if you are recording
+an
+instantaneous IV and there is run-down and you want to scale the traces
+to have the same prepulse amplitude. The original data are copied into
+the
+<a href="#EditingCommands">internal buffer</a> and as long as nothing
+else is copied into the <a href="#EditingCommands">internal buffer</a>
+the scaling can be undone by the <a href="#UndoingOperation">"Undoing
+an
+erroneous operation : Exchange"</a> mechanism.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#ScalingTraces">Up to '12. Scaling traces'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="NoiseAnalysis"></a>
+<h3>13. Noise analysis (non-stationary!)</h3>
+Non-stationary noise analysis serves to estimate the single-channel
+conductance
+and the number of channels. For a theoretical background please refer
+to
+<p>1. Sigworth , 1980, The variance of sodium current fluctuations at
+the
+node of Ranvier. J Physiol. 307:97-129.
+<br>
+2. Heinemann and Conti , 1992, Nonstationary noise analysis and
+application
+to patch clamp recordings. Meth. Enzymol. 207:131-48.
+</p>
+<p>Briefly, a fixed pulse during which the channels undergo a
+time-dependent
+relaxation is applied repeatedly, e.g. 50 times. The analysis is
+divided
+into three steps:
+<br>
+1. Selection of the time stretch and the background stretch to be used
+(if any)
+<br>
+2. Selection of records
+<br>
+3. Variance-mean analysis with a parabolic fit
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index</a></th>
+      <th><a href="#NoiseAnalysis">Up to '13. Noise analysis'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="NoiseSelection"></a>
+</p>
+<h3>13.1. Selection of records and cursor settings</h3>
+The stretch of the record that is used for the noise analysis is
+defined
+by the green <a href="#Cursors">cursors</a>. If you want to subtract a
+baseline variance you have to position the red <a href="#Cursors">cursors</a>
+over the corresponding stretch.
+<p>It is often advisable to eliminate "bad" records that contain e.g.
+disturbances
+or unwanted electrical activity from the set of recorded traces to be
+used
+for the noise analysis. One possibility is to go manually through the
+records
+and throw out those that appear to be bad.
+<font size="+1">Ana</font> offers
+also a somewhat more objective possibility to detect bad records. As a
+criterion <font size="+1">Ana</font> identifies a record as
+potentially bad
+if it deviates at a single data point from the crude mean by a certain
+number of S.D.'s. This factor is defined in the <a
+ href="#ParameterSettings">general
+parameter settings dialog</a>.
+</p>
+<p>With <tt>Analysis-&gt;Noise etc-&gt;NoiseAnalysis</tt> or <tt>Ctrl+N</tt>
+the selection of the records is started. First you have to select the
+range
+of records for which the noise-analysis is to be performed. If you want
+to use all records, no further selection is necessary. Also, if you
+have
+done previously a selection (that is saved on a "lst"-file; see below)
+that you want to use, no further selection is necessary; just confirm
+the
+corresponding questions. If you want to select the records manually,
+follow
+the instructions: In the <a href="#Traces">trace window</a> the single
+records are now displayed overlayed with the cumulative mean of the
+selected
+traces (apart from the first trace, that is shown without mean). If a
+trace
+has been identified as potentially bad by
+<font size="+1">Ana</font>, this
+will be written on top. The selection has now to be done with the
+keyboard:
+<br>
+- to accept a trace as good: hit "Y" (yes)
+<br>
+- to not accept a trace: hit "N" (no)
+<br>
+- to stop the selection process and proceed the analysis with the
+traces
+selected sofar: hit "S" (stop)
+<br>
+- to completely interrupt the noise-analysis: hit "Q" (quit)
+<br>
+- to go back one record: hit "B" (back)
+<br>
+- to rush, i.e. to accept automatically all good records and to ask
+explicitely only for the potentially "bad" records: hit "R" (rush)
+</p>
+<p>After finishing the selection it is written on a file with the same
+name as the data-file but with the extension ".lst". If such a file
+exists
+already you are asked if you want to overwrite the old selection. Thus,
+the selection of the good records is saved and you don't have to redo
+it.
+You just answer "yes" to the question "Use old selection(lst)?", the
+next
+time.
+<br>
+Because the selection file is simply a list based on the indexes of
+the traces it is not any more applicable if you change the data file by
+deleting or adding records. To avoid such a possible error you can also
+"extract" the selected records from a series by <tt>Edit-&gt;Extract
+records</tt>,
+that will put only the selected records as a series into the <a
+ href="#EditingCommands">internal
+buffer </a>that you can paste for example in an empty file.
+</p>
+<p>After the selection - using either all records, or using an old
+selection,
+or by going through the selection process as described above - the user
+is asked for "the number of segments". This has the following meaning:
+for the variance-mean plot one often does not want to display all data
+points but to have a more condensed representation. For this purpose,
+the
+current range of the calculated mean (within the selected stretch
+(green
+<a href="#Cursors">cursors</a>))
+is horizontally sliced into segments (this is the "number of
+segments").
+This cuts the current trace into several segments of equal vertical
+extension
+but possibly variable length. Rapidly changing parts are thus shorter,
+while a long plateau could be fit into a few segments. Within each
+segment
+of the mean current trace the current and the corresponding variance
+values
+are averaged and yield one point in the variance-mean plot (see also
+Sigworth
+, 1980, J Physiol. 307:97-129 and Heinemann and Conti , 1992, Meth.
+Enzymol.
+207:131-48). If you don't want to do this kind of averaging you can
+enter
+a very high number as the number of segments (e.g. larger than the
+number
+of points between the green <a href="#Cursors">cursors</a>).
+</p>
+<p>The result of the noise analysis so far is that the mean current and
+the variance has been calculated (and stored; you can display them as
+described
+in <a href="#Traces">2.2. Traces window</a>) for the whole trace.
+Furthermore,
+for the part between the green
+<a href="#Cursors">cursors</a> the current
+and variance values that come from the slicing procedure described
+above,
+are stored in an extra array that can be further analyzed by the
+variance-mean
+parabolic fit as described below. Also the (average) variance between
+the
+red <a href="#Cursors">cursors</a> has been calculated as background
+variance,
+that can be subtracted (or not) for the variance-mean analysis.
+</p>
+<p>A remark regarding the sign of the mean currents: <font size="+1">Ana</font>
+automatically converts a negative current range (between the green <a
+ href="#Cursors">cursors</a>)
+into a positive range by multiplying with -1!
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#NoiseAnalysis">Up to '13. Noise analysis'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="VarMeanFit"></a>
+</p>
+<h3>13.2. Variance-mean analysis</h3>
+By <tt>Analysis-&gt;Noise etc-&gt;Var Mean</tt>, or <tt>Ctrl+J</tt>
+the variance-mean
+parabolic fit dialog is invoked. This does not work if you haven't
+previously
+calculated the mean and variance as described above (if you have loaded
+a data file that was previously saved with <font size="+1">Ana</font>
+after
+having calculated the variance, the variance is also loaded; you don't
+have to redo the calculation; see <a href="#SavedFile">18.2. The
+internal
+data-format of ana: what is saved on a file?</a>). In the dialog you
+specify
+the initial values for the parameters, the number of iterations, which
+parameters are to be fit and how the background variance and the leak
+has
+to be treated. The fit is according to the following formula
+<p><tt>sigma<sup>2</sup> = sigma<sub>0</sub><sup>2</sup> +
+i*(1+o^2)*(I-leak)
+- (I-leak)<sup>2</sup>/N
+</tt>,
+</p>
+<p>where <tt>sigma<sub>0</sub><sup>2</sup></tt> is the background
+variance,
+<tt>leak</tt>
+is the leak current, <tt>i</tt> is the single channel current,
+<tt>N</tt>
+the number of channels, o is the "fraction open channel noise"
+(normally
+= 0; see below), and <tt>I</tt> the independent variable, the mean
+current.
+It is, of course, not advisable to have both, leak and background
+variance,
+as free parameters. Instead it is better to have as most as possible
+independent
+measurements for these two parameters, and to keep them fixed. After
+clicking
+<tt>OK</tt>
+in the dialog, the parabolic fit is performed and the results are
+displayed.
+You can export the results of the variance analysis by <tt>File-&gt;Export
+Analysis-&gt;Export Var-Mean</tt>. The results are written on a plain
+white-spaced
+ASCII file as columns. If you answer "YES" to the "Write trace?"
+question,
+the first three columns of the file contain the time, mean current (in
+pA), and mean variance values (in pA^2) of the whole trace. Note that
+the
+background variance has NOT been subtracted yet from the variance
+values.
+The next three columns contain: mean current of the segments, mean
+variance
+of the segments, and standard deviation of the variance. The background
+variance is written in the last (single-valued) column.
+<br>
+<i>Note on the parameter "o" (fraction of open channel noise): </i>The
+"profane" user should just ignore this value (setting it to 0). It is
+not
+a real parameter to fit as it is absolutely not independent from the
+parameter
+i. However, for the calculation of the maximal open probability it is
+sometimes
+useful to have an idea about how an "open channel noise" would
+influence
+the estimate of pmax. The idea is that with all channels open the
+variance
+is not zero, but equal to N*sigma<sub>open</sub><sup>2</sup>, where
+sigma<sub>open</sub><sup>2</sup>
+is the variance of an open channel that is parameterized as sigma<sub>open</sub><sup>2</sup>=(o*i)<sup>2</sup>,
+hence the meaning of the parameter o. If not all channels are open, the
+open channel noise is assumed to behave as N*p*sigma<sub>open</sub><sup>2</sup>,
+and putting this into the normal variance-mean-equation results in the
+above formula.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index</a></th>
+      <th><a href="#NoiseAnalysis">Up to '13. Noise analysis'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="SingleChannelAnalysis"></a>
+</p>
+<h3>14. Single channel analysis</h3>
+Two basic features are offered for single channel analysis: <a
+ href="#AmplitudeHistogram">amplitude
+histogram</a> analysis and <a href="#DwellTimes">dwell-time analysis</a>.
+The dwell-time analysis can only be done after having constructed and
+fitted
+the amplitude histogram by a sum of Gaussians, because in this way the
+levels are defined that are used for the <a href="#Idealization">automatic
+idealization</a>. Note that the idealization is COMPLETELY AUTOMATIC;
+it
+is not possible to change the single transitions. This possibility
+might
+be incorporated in future versions.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#SingleChannelAnalysis">Up to '14. Single channel
+analysis'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="AmplitudeHistogram"></a>
+<h3>14.1. Amplitude Histogram and Gaussian Fit</h3>
+To construct the amplitude histogram select <tt>Analysis-&gt;Construct
+Ampl.
+histogram</tt> (or <tt>Shift+H</tt> or via the toolbar). A dialog
+appears
+where you select
+<br>
+- if you want to restrict the analysis to the region between the green
+cursors
+<br>
+- the first and last entry to analyze
+<br>
+- the bin width used for the histogram
+<br>
+- the current-range
+<p>Then you fit the amplitude histogram with a sum of Gaussians
+by&nbsp;
+selecting <tt>Analysis-&gt;Fit Ampl. histogram</tt> (or <tt>Ctrl+M</tt>
+or
+via the toolbar). A dialog appears where you select
+</p>
+<p>- the number of gaussians (identical with the "number of components"
+of the <a href="#ParameterSettings">general settings</a>)
+<br>
+- if the gaussians shall be equidistant
+<br>
+- how the initial parameters of the Gaussians shall be chosen
+<br>
+- if the fitted parameters should be copied in the "parameter array"
+after the fit
+<br>
+- the stepsize and the number of iterations of the fit
+<br>
+- if keyboard input is allowed during the fit (this option turns on
+e.g. the possibility to interrupt the fit by hitting "s" (stop);
+however
+as the keyboard input is checked asynchronously any "s" typed during
+the
+fit, also if in another program, like e.g. a text-writing program, will
+interrupt the fit and you might want to disable this feature such that
+you can write during a lengthy fit).
+</p>
+<p>The program will likely NOT find automatically the correct
+parameters
+for a multi-Gaussian fit but they have to be selected manually in a
+simple
+graphical fashion described below, requiring thus at least two rounds
+of
+the Gaussian fit. The first time you better select "Automatic
+re-calculation"
+for the start params that leads to&nbsp; a practically random placement
+of the mid-points of the Gaussians. Each Gaussian component has a
+vertical
+green line at the midpoint, a horizontal green line at the peak value
+and
+circles at the ends of the horizontal line indicating the sigma-value
+of
+the Gaussian. The midpoint (vertical lines) can be moved with the left
+mouse button. The amplitude (vertical line) of the Gaussians can be
+moved
+with the right mouse button and the sigma value can be changed by
+moving
+one of the circles with the left mouse button. You should thus adjust
+manually
+all Gaussians in an approximate manner and then select again&nbsp; <tt>Analysis-&gt;Fit
+Ampl. histogram</tt> (or <tt>Ctrl+M</tt> or via the toolbar) but now
+selecting
+the option "Use last values" for the start parameters. Also the step
+size
+should not be too big ( a value of 0.1 is normally ok together with
+about
+1000-10000 iterations, depending of course on the number of Gaussians
+and
+how well they are defined by the data).
+</p>
+<p>If you select the option "equidistant means",&nbsp; the LEFTMOST
+midpoint
+and the next one are used for determining the position of the others!
+</p>
+<p>From the Parameters of the Gaussians the relative areas under each
+component
+are calculated (in %) and displayed together with the other parameters
+in&nbsp; the grey selectable and copyable text box on the right.
+Clicking
+on the button "Copy params to array" copies the parameters into the
+data
+array that is reachable by hitting "E" (or via the menu: <tt>Settings-&gt;EditParams</tt>).
+This array is part of the <a href="#ParameterSettings">settings</a>.
+It
+can be used here to define precise starting values and/or to save the
+gaussian
+parameters in a setting file from where they can be reloaded as
+starting
+values as described above.
+</p>
+<p>Once the Gaussians are fitted you can proceed with the <a
+ href="#Idealization">Idealization</a>.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#SingleChannelAnalysis">Up to '14. Single channel
+analysis'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Idealization"></a>
+</p>
+<h3>14.2. Idealization</h3>
+Once the amplitude histograms has been <a href="#DwellTimes">fitted
+with
+a sum of Gaussians</a>, the midpoints of the Gaussians are used as the
+levels for the idealized current traces. Two different kinds of citeria
+can be applied for the idealization:
+<br>
+- 1. a simple 50% threshold criterion or
+<br>
+- 2. a criterion based on the width (SD) of the respective Gaussians
+(as explained below).
+<br>
+Which of these criteria is used is selected in the <a
+ href="#ParameterSettings">General
+Settings dialog</a> in the check box "Use SD for idealize". If checked,
+criterion 2, otherwise criterion 1 is applied. Criterion 2 works as
+follows:
+<br>
+Suppose there are n levels, mi is midpoint of level i, vari is the
+SD^2 of level i, and y is a data point that has to be assigned to a
+level.
+<br>
+For each level the quantity pi=exp( -(mi-y)^2/ 2 / vari) is calculated
+and the level with the largest pi is chosen as the most likely one.
+<br>
+(Actually the pi's are calculated as (mi-y)^2/vari and the smallest
+pi is selected. The result is the same).
+<br>
+Idealization is dependent on a further parameter that is asked for
+when "<tt>Analysis-&gt;Idealize</tt>" (or <tt>Ctrl+I</tt>) is
+selected: the
+minimal number of data points that an acceptable event must be long.
+<p>The idealized trace is shown in blue and represents as such a <a
+ href="#TraceFitting">"fit"</a>
+of the data trace, implying that any other fit, like fitting an
+exponential
+will override and replace the idealization. Saving a data file in this
+status will save also the idealization, as any other fit.
+</p>
+<p><a name="ManualEditing"></a><br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#SingleChannelAnalysis">Up to '14. Single channel
+analysis'</a></th>
+    </tr>
+  </tbody>
+</table>
+</p>
+<h3>14.3. Manual editing of the idealized records</h3>
+It may happen that some events are not acceptable (e.g.&nbsp; too
+short)
+after the idealization. These can be eliminated in the following way:
+first,
+manually editing has to be enabled by a check-box-flag in the Settings
+dialog: make sure that the check box <b><tt>"pick events with right
+button"</tt></b>
+is checked in the settings dialog. This makes sure that the right
+button
+in the trace-window does not move the horizontal cursors but picks the
+events. Then place the mouse over the event that you want to change and
+press the right button. A popup-menu appears with various choices. The
+last action (elimination)&nbsp; can be undone if, and only if, the
+corresponding
+stretch is at least partially visible on the screen.
+<br>
+&nbsp;
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#SingleChannelAnalysis">Up to '14. Single channel
+analysis'</a></th>
+    </tr>
+  </tbody>
+</table>
+<p><a name="DwellTimes"></a>
+</p>
+<h3>14.4. Dwell time analysis</h3>
+Like the amplitude-histogram, the dwell times are delt with in 2 steps:
+1st construction of dwell time histograms, then 2nd. fit by a sum of
+exponentials.
+Several important general features apply, however, to the dwell time
+analysis:
+<p>- The fit by the sum of exponentials is completely independent of
+the
+representation in a histogram (bin width etc.). All events of a given
+level&nbsp;
+are explicitely taken into account (larger than a minimum dwell time to
+be specified) and the fit is done using a Maximum Likelihood criterion
+as detailed below.
+<br>
+- The dwell time histograms are cumulative histograms with a linear
+time scale. The vertical scale can be either linear or log dependent on
+the setting in the <a href="#ParameterSettings">general parameters
+dialog</a>(also
+selectable in the fitting dialog described below).
+</p>
+<p>Selecting <tt>Analysis-&gt;Construct Dwell Times</tt> (or just
+hitting
+<tt>O,</tt>
+or toolbar) the dwell time histograms for all levels are constructed
+and
+displayed. Here, the only important parameter is the bin width of the
+histograms,
+to be selected in the <a href="#SeriesFitDiag">series fit settings</a>.
+<br>
+Selecting <tt>Analysis-&gt;Fit Dwell Times</tt> (or just hitting
+<tt>Q,</tt>
+or toolbar) the dwell times of the specified level are fitted by the
+sum
+of exponentials as specified in the dialog that appears. Here you
+select
+</p>
+<p>- the number of exponentials
+<br>
+- start values for each time constant and coefficient to be fitted
+<br>
+- if you want to fit or otherwise fix the time constant and/or
+coefficient
+<br>
+- some other parameters
+</p>
+<p>Note that the LAST COEFFICIENT WILL ALWAYS BE VARIABLE because the
+sum
+of the coefficients is constrained to be 1, such that the number of
+effective
+parameters is reduced by 1, excluding the last coefficient as a
+fittable
+parameter.
+</p>
+<p>The fit is done according to the Max.Likelihood criterion i.e. for
+each
+event, e, of duration te, the likelihood is calculated as
+</p>
+<p>Le= sum over i (a[i]*exp(-te/tau[i])) / LMINMAX
+<br>
+where LMINMAX is calculated as
+<br>
+LMINMAX=sum(a[i]*(exp(-MinDwell/tau[i]) - exp(-MaxDwell/tau[i]))
+<br>
+and is the probability that an event has a duration between MinDwell
+and MaxDwell. The parameter MinDwell has to be specified in the above
+mentioned
+dialog. The parameter MaxDwell is determined from the shortest length
+of
+the records used for the construction of the dwell time histogram.
+<br>
+</p>
+<p>&nbsp;
+<br>
+</p>
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="help-ana.htm#Index">Index&nbsp;</a></th>
+      <th><a href="help-ana.htm#SingleChannelAnalysis">Up to '14.
+Single channel
+analysis'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="BinomialPeakAnalysis"></a>
+<p style="font-weight: bold;"><big>14.5. Binomial Peak analysis</big></p>
+<p>Sometimes, for example if several channels are in a patch, one would
+like to perform a binomial analysis of the areas of the amplitude
+histogram. One reason is to determine the open-probability assuming the
+presence of N independent channels. Or, the independence of the
+channels shall be tested. For these purposes, the "Binomial Peak Fit"
+has been implemented. It can be assessed via "Analysis-&gt;Fit Binomial
+Distribution" that invokes a start-dialog. Data can be entered in the
+white window. The format is "n A F", for each data point, where n is
+the associated current level, A the experimental probability (in %) and
+F is the fitted probability. The latter can be set to any value for
+input and can be used to read out the fitted value after the fit.<br>
+<br>
+Let's take an example. Assume two channels, each with popen=p=0.5. The
+"ideal" experimental data would be<br>
+<br>
+0 25 0<br>
+1 50 0<br>
+2 25 0<br>
+<br>
+I.e. Prob=0.25 to have no channel open, 1/2 that one channel is open
+and 0.25 that both are open.<br>
+<br>
+You can enter the data either manually, or, better, paste them from
+another program. <br>
+<br>
+NOTE THAT TO MAKE A NEW LINE IN THE DATA INPUT WINDOW YOU TO PRESS
+CTRL+ENTER!<br>
+<br>
+If (and only if) you have previously fitted an amplitude histogram, the
+corresponding area values are shown initially as experimental values in
+the input window. You don't need to use these, however. By clicking on
+the "Copy Data from amplitude histogram" button, the data from the
+amplitude histogram (if that is present) will be copied into the data
+window and overwrite any other data there.<br>
+<br>
+Three options are offered for fit. <br>
+1. The simple binomial fit. This is the usual case. Each level, k, has
+probability<br>
+&nbsp;<br>
+<img alt="Simple binomial" title="Simple binomial" src="jpg/binom1.JPG"
+ style="height: 97px; width: 250px;"><br>
+<span style="font-size: 12pt; font-family: Arial;" lang="EN-US"><span
+ style="position: relative; top: 15pt;"><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+ coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+ filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:84pt;
+ height:36pt' o:ole="">
+ <v:imagedata src="file:///C:\DOCUME~1\mik\IMPOST~1\Temp\msohtml1\01\clip_image001.wmz"
+  o:title=""/>
+</v:shape><![endif]--><!--[if !vml]--><!--[endif]--></span><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1192815974">
+ </o:OLEObject>
+</xml><![endif]--></span></p>
+<p>&nbsp;Note that the parameter N can be selected as a free parameter.
+However, for numerical reasons, the Simplex algorithm might not find
+the best value. Try to do the fit from several starting values for N
+(and reasonable values for p=p1) and check the resulting SD value shown
+after the fit. The best fit has the lowest SD value.<br>
+For this simple binomial fit the parameters p2 and N2 are irrelevant.<br>
+<br>
+2. The second case assumes two "modes" of the channel, one mode with
+p=p1 and another mode with p=p<sub>2</sub>. N is the total number of
+channels, while N<sub>2</sub> is the number of channels in mode 2. This
+N<sub>1</sub>=N-N<sub>2</sub> is the number of channels in mode 1.
+Again, the N's can be chosen as free parameters but the Simplex
+algorithm has difficulties finding the true minimum!!<br>
+The formula for calculating the probability for each level, k, in this
+case is<br>
+<br>
+<span style="font-size: 12pt; font-family: Arial;" lang="EN-US"><span
+ style="position: relative; top: 15pt;"><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+ coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+ filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:4in;
+ height:36pt' o:ole="">
+ <v:imagedata src="file:///C:\DOCUME~1\mik\IMPOST~1\Temp\msohtml1\01\clip_image001.wmz"
+  o:title=""/>
+</v:shape><![endif]--><!--[if !vml]--><!--[endif]--></span><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1192815730">
+ </o:OLEObject>
+</xml><![endif]--></span><img
+ alt="Two modes" title="Two modes" src="jpg/binom2.JPG"
+ style="width: 779px; height: 98px;"><br>
+</p>
+<p>with the definition that (n over j) = 0 for j&gt;n.<br>
+</p>
+<p>3. The third option assumes a double-barreled channel with a common
+gate with popen=ps=p1 and a protopore gate with popen=pf=p1. The two
+gates are assumed to be independent. <br>
+</p>
+<p><br>
+After performing the fit, experimental values are shown as bars, fitted
+values are shown as symbols.<br>
+<br>
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#SingleChannelAnalysis">Up to '14. Single channel
+analysis'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="SpectralAnalysis"></a>
+</p>
+<h3>15. Spectral analysis</h3>
+no help yet, sorry.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#SpectralAnalysis">Up to '15. Spectral analysis'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Exporting"></a>
+<h3>16. Exporting data<br>
+<br>
+<a name="ExportRawData"></a></h3>
+<h3>
+16.1. Export raw data</h3>
+Raw data can be exported in ASCII format. The format is in columns with
+column 1 containing the time, column 2 containing the data of the first
+entry, column 3 the data of the 2nd entry, ... The columns are
+separated
+by "white space". You can chose to export either all data or only
+between
+the green cursors. The default time/current units are seconds/Amperes
+but
+there is also the possibility to scale these to export either in ms/pA
+or
+ms/microA. The Biopatch ASCII&nbsp; format can be read by an analysis
+program
+of Biologic. The other options (autocovariance, average between
+cursors)
+are quite special and not further documented at this time.
+<br>
+Since Jan. 2006, you can export data also using cut and paste. Selecting<big
+ style="font-family: monospace;"> View-&gt;Numbers</big> the upper
+right window displays the selected traces as columns of numbers that
+can be copied into the Windows clipboard (right mouse button!) and
+pasted into Excel ot other programs. The data format of the numbers
+(i.e. time in seconds or milliseconds, current in A or pA or microA, or
+raw data) is defined in the <big style="font-family: monospace;">Settings-&gt;Export/Table
+scalings</big> dialog.<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Exporting">Up to '16. Exporting data'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="ExportAnalysis"></a>
+<h3>16.2. Export analysis results (mean, tau, peak, etc)</h3>
+no help yet, sorry.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Exporting">Up to '16. Exporting data'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="ExportNoise"></a>
+<h3>16.3. Export noise analysis</h3>
+You can export the results of the
+<a href="#NoiseAnalysis">noise analysis</a>
+by <tt>File-&gt;Export Analysis-&gt;Export Var-Mean</tt>. The results
+are written
+on a plain white-spaced ASCII file as columns. If you answer "YES" to
+the
+"Write trace?" question, the first three columns of the file contain
+the
+time, mean current (in pA), and mean variance values (in pA^2) of the
+whole
+trace. Note that the background variance has NOT been subtracted yet
+from
+the variance values. The next three columns contain: mean current of
+the
+segments, mean variance of the segments, and standard deviation of the
+variance. The background variance is written in the last
+(single-valued)
+column.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Exporting">Up to '16. Exporting data'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="ExportSpectrum"></a>
+<h3>16.4. Export spectrum</h3>
+no help yet, sorry.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Exporting">Up to '16. Exporting data'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="ExportAmplitudeHistogram"></a>
+<h3>16.5. Export amplitude histogram</h3>
+You can export the results of the
+<a href="#AmplitudeHistogram">amplitude
+histograms analysis </a>by <tt>File-&gt;Export Analysis-&gt;Amplitude
+Histogram</tt>.
+The results are written on a plain ASCII file as columns with "white
+space"
+separating the columns. Column 1 contains the current bins. Column 2
+contains
+the data. Column 3 contains the Gaussian fit. Column 4 contains the
+parameters
+of the Gaussian fit in the order: mean, sigma, amplitude, area (in %).
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Exporting">Up to '16. Exporting data'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="ExportDwellTimeHistogram"></a>
+<h3>16.5. Export dwell time histogram</h3>
+You can export the results of the
+<a href="#ExportDwellTimeHistogram">dwell
+time histogram</a> by <tt>File-&gt;Export
+Analysis-&gt;ExportDwellTimeHisto</tt>.
+The results are written on a plain ASCII file as columns with "white
+space"
+separating the columns. The data for the various levels are written on
+top of each other, separated by a blank line. Column 1 contains the
+time
+bins. Column 2 contains the data and column 3 the fit (if present) with
+the sum of exponentials.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Exporting">Up to '16. Exporting data'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Misc"></a>
+<h3>17. Misc.</h3>
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Misc">Up to '17. Misc.'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="EditStimwave"></a>
+<h3>17.1. Changing the pulse protocol ("Stimwave")</h3>
+no help yet, sorry.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Misc">Up to '17. Misc.'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Appendix"></a>
+<h3>18. Appendix</h3>
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Appendix">Up to '18. Appendix'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="SupportedFiles"></a>
+<h3>18.1. Supported data file types</h3>
+Below is a list of files that can be read by <font size="+1">Ana</font>.
+For Axon binary files (abf-files) it was sometimes difficult to get the
+correct gain-settings. For this reason, the "abf-gain-factor" has been
+introduced in the <a href="#ParameterSettings">Parameter Settings</a>
+that
+allows the user to multiply the default-read gain by a factor in order
+to get the correct amplitude, but this should not be necessary anymore.
+For all files you can <i>a posteriori</i> change the gain in the <tt>Edit-&gt;SeriesParameters</tt>
+for each series individually (maybe tedious).
+<p>- HEKA Pulse Version 7: Select the ".dat" file (the pul and pgf must
+of course be present)
+<br>
+- HEKA Pulse Version 8: Select the ".dat" file (the pul and pgf must
+of course be present)
+<br>
+- Axon abf
+<br>
+- pclamp Clampex 5.5.
+<br>
+- pclamp Fetchex 5.5.
+<br>
+- Biologic DTR file (digital tape recorder)
+<br>
+- Atari Pulsed (Affolter), dataversion 200
+<br>
+- Pulse++ of Uli Rexhausen (only version 1.2)
+<br>
+- GePulse: data files generated by the free acquistion program written
+by M. Pusch&nbsp; (for National Instruments PCI-6035E and PCI-6052 and
+now also many other NI interfaces and
+Instrutech ITC-16 and ITC-18 interfaces). <a target="_blank"
+ href="sframes/Gepulse.html">Download
+here.</a>
+<br>
+&nbsp;
+</p>
+<p>If you are interested in reading <b>YOUR</b> favorite data file,
+send
+me a documentation and an example and I will try my best.
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Appendix">Up to '18. Appendix'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="SavedFile"></a>
+</p>
+<h3>18.2. The internal data-format of ana: what is saved on a file?</h3>
+All the original data and the performed analysis is saved on the file,
+but not the
+<a href="#ParameterSettings">parameter settings</a>. For a
+rough description of the file format, see below. If you are interested
+in a precise description, see
+<a href="data-format.htm">Data-Format (detailed)</a>.
+If you select <tt>File-&gt;Save As</tt> <font size="+1">Ana</font>
+proposes
+as default a name that is distinct from the original data file name in
+order to avoid that you overwrite it. The "standard" but not required
+extension
+is "EAT".
+<p>The data file (version 6.0) is written by the following procedure:
+The
+2 procedures used are:
+</p>
+<p>WriteBytes(CFile * fp, UINT pos /* file positions */, UINT
+NumberOfBytes,
+BYTE * variable); and
+</p>
+<p>"WriBy" is a macro that writes a variable in binary format using the
+size of the type as the number of bytes.
+</p>
+<p><tt>WriteBytes(fp, pos, 64, Version);</tt>
+<br>
+<tt>WriteBytes(fp, pos, 12, MainUnits);</tt>
+<br>
+<tt>WriBy(ADCConversion)</tt>
+<br>
+<tt>WriBy(NumberOfChannels)</tt>
+<br>
+<tt>WriBy(Temperature)</tt>
+<br>
+<tt>WriteBytes(fp, pos, 256, buff);</tt>
+<br>
+<tt>if (versionnumber&gt;4){</tt>
+<br>
+<tt>&nbsp;&nbsp;&nbsp; RootText.WriteOnFile(pos, fp); // Writes the
+text assigned to the root. The size depends on the string-length (if
+any).</tt>
+<br>
+<tt>}</tt>
+<br>
+<tt>WriBy(NEntries)</tt>
+<br>
+<tt>WriBy(NSeries)</tt>
+<br>
+<tt>for (__int32 i=0; i&lt;NEntries; i++){</tt>
+<br>
+<tt>WriBy(entries[i].NData)</tt>
+<br>
+<tt>WriBy(entries[i].FilePos)</tt>
+<br>
+<tt>WriBy(entries[i].P4Present)</tt>
+<br>
+<tt>WriBy(entries[i].Temperature)</tt>
+<br>
+<tt>WriBy(entries[i].Time)</tt>
+<br>
+<tt>WriBy(entries[i].IsBold)</tt>
+<br>
+<tt>WriBy(entries[i].s1) // unused variables</tt>
+<br>
+<tt>WriBy(entries[i].s2)</tt>
+<br>
+<tt>WriBy(entries[i].s3)</tt>
+<br>
+<tt>WriBy(entries[i].s4)</tt>
+<br>
+<tt>if (VersionNumber&gt;4){</tt>
+<br>
+<tt>entries[i].EntryText.WriteOnFile(pos, fp);</tt>
+<br>
+<tt>}</tt>
+<br>
+<tt>} // end for entries</tt>
+<br>
+<tt>for ( i=0; i&lt;NSeries; i++){</tt>
+<br>
+<tt>WriBy(series[i].VHold)</tt>
+<br>
+<tt>WriBy(series[i].Filter)</tt>
+<br>
+<tt>WriBy(series[i].StimInterval)</tt>
+<br>
+<tt>WriBy(series[i].SampleTime)</tt>
+<br>
+<tt>WriBy(series[i].Gain)</tt>
+<br>
+<tt>WriteBytes(fp, pos, SERIESCOMMENTSIZE, series[i].Comment);</tt>
+<br>
+<tt>WriBy(series[i].firstrec)</tt>
+<br>
+<tt>WriBy(series[i].NPulses)</tt>
+<br>
+<tt>WriBy(series[i].NumAveraged)</tt>
+<br>
+<tt>WriBy(series[i].P4Present)</tt>
+<br>
+<tt>WriBy(series[i].P4VHold)</tt>
+<br>
+<tt>if (VersionNumber&gt;4){</tt>
+<br>
+<tt>series[i].SeriesText.WriteOnFile(pos, fp);</tt>
+<br>
+<tt>}</tt>
+<br>
+<tt>WriBy(series[i].NSegs)</tt>
+<br>
+<tt>for (int k=0; k&lt;series[i].NSegs; k++){&nbsp;&nbsp; //MaxSegs;
+k++) {</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].A)</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].T)</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].SV)</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].ST)</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].FV)</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].FT)</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].SK)</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].s1)</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].s2)</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].s3)</tt>
+<br>
+<tt>WriBy(series[i].Pulses[k].s4)</tt>
+<br>
+<tt>}</tt>
+<br>
+<tt>WriBy(series[i].IsBold)</tt>
+<br>
+<tt>WriBy(series[i].s1)</tt>
+<br>
+<tt>WriBy(series[i].s2)</tt>
+<br>
+<tt>WriBy(series[i].s3)</tt>
+<br>
+<tt>WriBy(series[i].s4)</tt>
+<br>
+<tt>WriteNoise(fp, pos, i);</tt>
+<br>
+<tt>WriteSpectrum(fp, pos, i);</tt>
+<br>
+<tt>series[i].Histo.Write(fp, pos);</tt>
+<br>
+<tt>series[i].VM.Write(fp, pos);</tt>
+<br>
+<tt>series[i].Lore.Write(fp, pos);</tt>
+<br>
+<tt>series[i].SF.Write(fp, pos);</tt>
+<br>
+<tt>series[i].DwellTimes.Write(fp, pos);</tt>
+<br>
+<tt>for (int kk=0; kk&lt;19; kk++){</tt>
+<br>
+<tt>BOOL dummy=FALSE;</tt>
+<br>
+<tt>WriBy(dummy)</tt>
+<br>
+<tt>}</tt>
+<br>
+<tt>}</tt>
+<br>
+<tt>for (i=0; i&lt;NEntries; i++){</tt>
+<br>
+<tt>WriteBytes(fp, pos, entries[i].NData*2, entries[i].IntData);</tt>
+<br>
+<tt>if (entries[i].P4Present) {</tt>
+<br>
+<tt>WriteBytes(fp, pos, entries[i].NData*2,entries[i].P4Data);</tt>
+<br>
+<tt>}</tt>
+<br>
+<tt>if (versionnumber&gt;2){ // Write Fit and Results</tt>
+<br>
+<tt>WriteFit(fp, pos, i);</tt>
+<br>
+<tt>results[i].Write(fp, pos);</tt>
+<br>
+<tt>for (int kk=0; kk&lt;20; kk++){</tt>
+<br>
+<tt>BOOL dummy=FALSE;</tt>
+<br>
+<tt>WriBy(dummy)</tt>
+<br>
+<tt>}</tt>
+<br>
+<tt>}</tt>
+<br>
+<tt>}</tt>
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Appendix">Up to '18. Appendix'</a></th>
+    </tr>
+  </tbody>
+</table>
+<a name="Syntax"></a>
+</p>
+<h3>18.3. Syntactic rules for the user-defined function</h3>
+The independent variable can be written as "v" or as "t".
+<br>
+Parameters are a[0], a[1], etc. The index, i, in a[i] must be a
+constant
+number (i.e. not an expression).
+<br>
+Arbitrary nested expressions (with parenthesis) are allowed.
+<br>
+Spaces are ignored. No distinction between upper- and lowercase is
+made.
+<br>
+Allowed functions are:
+<br>
+a+b
+<br>
+a-b
+<br>
+a*b
+<br>
+a/b
+<br>
+a^b
+<br>
+exp(a)
+<br>
+exp10(a)=10^a<br>
+inv(a)=1/a
+<br>
+sqrt(a)=square root
+<br>
+log(a)=natural log
+<br>
+log10(a)=log base 10<br>
+sin(a)<br>
+cos(a)<br>
+fabs(a)=absolute value
+<br>
+step(a) = 0 for a&lt;0; 1 else;&nbsp;&nbsp; (this can also be used to
+calc. the maximum and minimum: Max(a,b)=a*step(a-b)+b*step(b-a) ;
+Min(a,b)=a*step(b-a)+b*step(a-b) )<br>
+<p>Comments can be added after the function definition after a '.
+Examples:
+</p>
+<p>((a[0]+a[1]*exp(-t/[a[2]))^2)*1e-12 ' square of a single exponential
+</p>
+<p>step(1-t)*a[0] + step(t-1)*a[1] ' = a[0] for t&lt;1 and a[1] for
+t&gt;=1
+</p>
+<p>exp(a[0]+log(a[1]*sqrt(fabs(t-a[8]))))^(1-step(a[3]-t)) ' absurd
+example
+<br>
+&nbsp;
+<table bgcolor="#ccffff" border="1" width="100%">
+  <tbody>
+    <tr>
+      <th><a href="#Index">Index&nbsp;</a></th>
+      <th><a href="#Appendix">Up to '18. Appendix'</a></th>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+
+</body>
+</html>
